@@ -1,0 +1,102 @@
+
+.main-header{
+    position: fixed;
+    width: 100%;
+    background-color: rgba(0, 20, 17, 0.8);
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+    padding: 10px;
+    max-height: 80px;
+}
+
+.header-logo{
+    width: 150px;
+}
+
+.nav-bar{
+    margin: 0;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.nav-menu{
+    display: none;
+}
+
+.nav-menu-icon{
+    font-size: 2rem;
+    color: teal;
+    display: none;
+    max-width: 40px;
+}
+
+.nav-list{
+    display: flex;
+    margin: auto;
+    list-style: none;
+    gap: 1.5rem;
+    justify-content: space-around;
+}
+
+.nav-link{
+    margin: auto;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: teal;
+}
+
+.nav-link:hover{
+    font-size: 1.51rem;
+    color: white;
+}
+
+.shop-btn{
+    padding: 5px 15px;
+    border: 0.5px solid teal;
+    border-radius: 20px; 
+}
+
+.shop-btn:hover, .user-btn:hover{
+    background-color: teal;
+    color: black;
+}
+
+.booking-btn{
+    padding: 5px 15px;
+    background-color: teal;
+    border: 0.5px solid white;
+    color: rgb(0, 20, 17);
+    border-radius: 20px;
+}
+
+.booking-btn:hover{
+    padding: 5px 15px;
+    background-color: rgb(255, 93, 52);
+    border: 0.5px solid white;
+    color: white;
+}
+
+.user-btn{
+    padding: 5px 5px;
+    border: 0.5px solid teal;
+    border-radius: 30px;
+}
+
+@media only screen and (max-width: 1100px) {
+
+.nav-menu-icon{
+    display: flex;
+}
+.nav-list{
+    width: 0;
+}
+ .nav-link{
+    width: 0;
+    display:none;
+ }
+  
+}

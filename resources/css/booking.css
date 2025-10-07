@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=Karla:ital,wght@0,200..800;1,200..800&family=Noto+Color+Emoji&display=swap');
+
+html{
+      scroll-behavior: smooth;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    font-family: "Alan Sans", sans-serif;
+}
+
+body{
+    background-color: ghostwhite;
+    overflow-x: hidden;
+    background: url(../images/booking/bookingBg.png) center center/cover fixed;
+}
+
+.booking-section{
+    width: 100vw;
+    padding: 80px;
+    min-height: fit-content;
+}
+
+.booking-container{
+    max-width: 500px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    padding: 40px;
+    border-radius: 80px;
+}
+.booking-container h1{
+    font-size: 2.5rem;
+    color: white;
+    padding-bottom: 40px;
+}
+
+
+.booking-container form{
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: white;
+}
+
+.booking-container label{
+    width: 100%;
+    text-align: left;
+}
+
+.booking-inputs{
+    height: 40px;
+    width: 100%;
+    background-color: rgb(219, 240, 240);
+    border-radius: 5px;
+}
+
+.submit-btn{
+    width: 50%;
+    border-radius: 20px;
+}
+

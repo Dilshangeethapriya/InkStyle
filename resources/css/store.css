@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=Karla:ital,wght@0,200..800;1,200..800&family=Noto+Color+Emoji&display=swap');
+
+html{
+      scroll-behavior: smooth;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    font-family: "Alan Sans", sans-serif;
+}
+
+body{
+    background-color: ghostwhite;
+    overflow-x: hidden;
+    background-color: rgb(0, 20, 17);
+}
+
+.store-banner{
+    background: url("../images/Store/banner1.jpg")  center center/cover;
+    padding: 80px ;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    width: 100vw;
+    min-height: 400px;
+}
+
+
+
+.banner-content{
+    max-width: 800px;
+}
+
+.banner-content h1{
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+
+.banner-content p{
+    font-size: 1.2rem;
+}
+
+
+/* --- Products ---- */
+
+.products-section{
+    padding: 50px 0;
+    min-height: fit-content;
+}
+
+.products-section h1{
+    font-size: 2.5rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.products-container{
+    position: relative;
+    width: 60%;
+    display: grid;
+    margin: auto;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    gap: 10px;
+}
+
+.product-card{
+    width: 100%;
+    border-radius: 5px;
+    padding-bottom: 10px;
+    background: teal;
+    margin-bottom: 20px;
+}
+
+.product-card a{
+    text-decoration: none;
+}
+
+.product-detail-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-card:hover{
+   transform: scale(100.5%);
+}
+
+.product-card img{
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.product-name-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    margin-top: 5px;
+}
+
+.product-card i{
+    font-size: 1.5rem;
+    color: white;
+    margin-right: 15px;
+}
+
+.product-card i:hover{
+    transform: scale(102%);
+}
+
+.product-card h3{
+    font-size: 1.5rem;
+}
+.product-card p{
+    font-size: 1.2rem;
+}
+.product-card h3,p{
+    margin-left: 15px;
+    color: white;
+}

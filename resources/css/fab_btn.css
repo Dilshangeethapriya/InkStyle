@@ -1,0 +1,28 @@
+.cart-icon{
+    position: fixed;
+    z-index: 10;
+    bottom: 40px;
+    right: 40px;
+    background: teal;
+    width: fit-content;
+    border: 1px solid white;
+    border-radius: 40px;
+    padding: 15px 12px;
+}
+
+.cart-icon.stopped{
+    position: relative;
+    float: right;
+    bottom: 105px;
+    right: 40px;
+}
+
+.cart-icon:hover{
+    transform: scale(102%);
+    background: rgb(0, 138, 138);
+}
+
+.cart-icon i{
+    font-size: 2rem;
+    color: white;
+}

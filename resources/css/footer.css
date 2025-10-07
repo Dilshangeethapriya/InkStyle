@@ -1,0 +1,155 @@
+ footer{
+    position: relative;
+    width: 100vw;
+    height: 50vh;
+    background-color: rgb(2, 36, 30);
+  }
+
+  .footer-container{
+    padding-top: 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    margin: auto;
+    max-width: 70%;
+    color: white;
+    
+  }
+
+  .footer-logo{
+    display: flex;
+    max-width: 100%;
+   margin-bottom: 30px;
+  }
+  .footer-logo img{
+    max-width: 50%;
+  }
+
+  
+  .social-media{
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+   .social-media i{
+    font-size: 2.5rem;
+    text-decoration: none;
+    color: white;
+  }
+
+  .social-media i:hover{
+    transform: scale(105%);
+  }
+
+
+  .quick-links{
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .quick-links h3{
+     padding-bottom: 25px;
+  }
+    .quick-links li{
+     padding-bottom: 15px;
+  }
+
+  .quick-links li:hover{
+     transform: scale(105%);
+  }
+
+  .quick-link-list{
+     list-style: none;
+  }
+
+  .quick-link{
+     text-decoration: none;
+     color: white;
+     padding-bottom: 30px;
+  }
+
+  
+
+  .footer-contact{
+    padding-top: 30px;
+    align-items: center;
+  }
+
+  .footer-contact h3 {
+    margin-top: 30px;
+    padding-bottom: 20px;
+    margin: auto;
+    padding-bottom: 10px;
+    text-align: left;
+  }
+
+  .contact-item{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    gap: 30px;
+    margin-bottom: 10px;
+  }
+  .contact-item i{
+    width: 10%;
+    font-size: 2rem;
+  }
+
+  .contact-item p{
+    height: 20px;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-logo,.quick-links{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+ .copy-rights-note{
+  position: absolute;
+  height: 50px;
+  width: 80%;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+  color: white;
+  border-top: 0.5px solid white;
+  font-size: x-small;
+ }
+
+ .copy-rights-note p{
+  margin: 20px;
+  text-align: center;
+ }
+
+
+ /* --- Media Queries --- */
+
+
+
+@media only screen and (max-width: 1000px) {
+
+     footer{
+    height: 80vh;
+  }
+
+}
+
+@media only screen and (max-width: 1000px) {
+
+     footer{
+    height: 100vh;
+  }
+
+}
+
+
+
+
