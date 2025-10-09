@@ -113,6 +113,9 @@
   }
 
  .copy-rights-note{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   height: 50px;
   width: 80%;
@@ -121,12 +124,19 @@
   transform: translate(-50%);
   color: white;
   border-top: 0.5px solid white;
-  font-size: x-small;
+  font-size: 0.8rem;
  }
 
  .copy-rights-note p{
   margin: 20px;
   text-align: center;
+ }
+
+ .copy-rights-note a{
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: white;
  }
 
 

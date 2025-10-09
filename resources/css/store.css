@@ -71,6 +71,7 @@ body{
     padding-bottom: 10px;
     background: teal;
     margin-bottom: 20px;
+    transition: 0.3s;
 }
 
 .product-card a{
@@ -84,7 +85,7 @@ body{
 }
 
 .product-card:hover{
-   transform: scale(100.5%);
+   transform: translateY(-5px);
 }
 
 .product-card img{

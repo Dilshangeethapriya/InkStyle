@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Store - InkStyle by Dinu</title>
-    <link rel="stylesheet" href="./resources/css/store.css">
+    <link rel="stylesheet" href="./resources/css/product.css">
     <link rel="stylesheet" href="./resources/css/header.css">
     <link rel="stylesheet" href="./resources/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
@@ -31,35 +31,37 @@
          </nav>
     </header>
 
-   <section class="store-banner">
-    <div class="banner-content">
-       <h1>Best Quality Beauty Products, Just for You</h1>
-       <p>Discover a handpicked collection of beauty products designed to bring out the best in you.
-         From daily essentials to premium salon favorites, we offer trusted brands and carefully selected items all at your fingertips.
-          Shop with ease, enjoy great value, and let us deliver beauty straight to your doorstep.</p>
-    </div>
-   </section>
+   
+   <section class="product-details-section">
 
-   <section class="products-section" style="height: 100vh;">
-    <h1>Products</h1>
-         <div class="products-container">
-            <div class="product-card">
-                <img src="./resources/images/Store/shampoo.jpg" alt="product image">
-                <div class="product-detail-container">
-                    <div class="product-name-container">
-                  <h3 class="product-name">Hair Shampoo</h3>
-                  <p class="product-price">800.00 LKR</p>
-                 </div>
-                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-                </div>
-            </div>
-            
+    <div class="product-details-container">
+      <div class="product-image">
+        <img src="./resources/images/Store/shampoo.jpg" alt="Hair Shampoo">
+      </div>
+      <div class="product-info">
+        <h1>Hair Shampoo</h1>
+        <p class="product-price">800.00 LKR</p>
+        <p class="product-description">
+          Experience soft, shiny, and healthy hair with our premium Hair Shampoo.
+          Formulated with natural extracts and gentle cleansing agents, it nourishes
+          your scalp and protects your hair from damage while maintaining natural moisture.
+        </p>
+
+        <div class="product-controls">
+         <form action="./product.html">
+                          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" name="quantity" min="1" value="1">
+        </div>
+
+        <button type="submit" class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
+         </form>
+
+      </div>
+    </div>
+ 
         
    </section>
-       <a href="#">
-            <div class="cart-icon" id="cart-icon">
-            <i class="fa-solid fa-cart-shopping"></i>
-        </div>
+     
        </a>
     <footer id="footer">
         <div class="footer-container">
@@ -100,7 +102,7 @@
            </div>
         </div>
         <div class="copy-rights-note">
-          <p> © 2025 All Rights Reserved @ InkStyle by Dinu | Designed & Developed by Dilshan Geethappriya</p>
+          <p> © 2025 All Rights Reserved @ InkStyle by Dinu | Designed & Developed by Dilshan Geethappriya</p><a href="./termsAndConditions.html">Terms and Conditions</a>
         </div>
     </footer>
  <script src="./resources/js/fab_btn.js"> </script>

@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=Karla:ital,wght@0,200..800;1,200..800&family=Noto+Color+Emoji&display=swap');
+
+html{
+      scroll-behavior: smooth;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    font-family: "Alan Sans", sans-serif;
+}
+
+body{
+    background-color: ghostwhite;
+    overflow-x: hidden;
+    background-color: rgb(0, 20, 17);
+}
+
+
+
+.product-details-section {
+  width: 100vw;
+  padding: 50px;
+  padding-top: 100px;
+}
+
+.product-details-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap : 40px
+}
+
+.product-image img {
+  width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.product-info {
+  max-width: 500px;
+}
+
+.product-info h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.product-price {
+  font-size: 1.3rem;
+  color: #e4b500;
+  margin-bottom: 20px;
+}
+
+.product-description {
+  margin-bottom: 25px;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+.product-controls {
+  margin-bottom: 20px;
+}
+
+.product-controls input {
+  width: 60px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+}
+
+.product-controls label{
+    color:white;
+}
+
+.add-to-cart-btn {
+  background-color: teal;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #0f6666c0;
+}
+

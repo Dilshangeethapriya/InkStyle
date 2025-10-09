@@ -1,0 +1,60 @@
+
+html{
+      scroll-behavior: smooth;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    font-family: "Alan Sans", sans-serif;
+}
+
+body{
+    background-color: ghostwhite;
+    overflow-x: hidden;
+    background-color: rgb(0, 20, 17);
+}
+
+.terms-section {
+  padding: 80px 10%;
+  background-color: #111;
+  color: #eee;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.7;
+}
+
+.terms-container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.terms-container h1 {
+  font-size: 2.5rem;
+  color: #f5f5f5;
+  text-align: center;
+  margin-bottom: 40px;
+  border-bottom: 2px solid teal;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.terms-item {
+  margin-bottom: 30px;
+}
+
+.terms-item h2 {
+  font-size: 1.4rem;
+  color: teal;
+  margin-bottom: 10px;
+}
+
+.terms-item p {
+  color: #ccc;
+}
+
+.terms-last {
+  margin-top: 40px;
+  text-align: center;
+  font-style: italic;
+  color: #bbb;
+}
