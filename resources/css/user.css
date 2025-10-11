@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=Karla:ital,wght@0,200..800;1,200..800&family=Noto+Color+Emoji&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Alan Sans", sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: rgb(0, 20, 17);
+  color: white;
+  min-height: 100vh;
+}
+
+
+.user-section {
+  width: 100vw;
+  min-height: fit-content;
+  padding-top: 80px;
+}
+
+.tabs-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+}
+
+
+.tabs-container .tabs {
+  height: 100vh;
+  width: 350px;
+  background-color: #02241e;
+  font-size: 1.3rem;
+  padding-top: 40px;
+}
+
+.tabs-container .tabs .tab {
+  padding: 15px 25px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.tabs-container .tabs .tab:hover {
+  background-color: #003b32;
+  color: #e4b500;
+}
+
+.tabs-container .tabs .tab.active {
+  color: #e4b500;
+  background-color: #002c25;
+  border-left: 5px solid #e4b500;
+}
+
+.tabs-container .content-container {
+ width: 100%;
+ padding: 30px;
+}
+
+.tabs-container .content-container .content {
+  display: none;
+}
+
+.tabs-container .content-container .content.active {
+  display: block;
+}
+
+
+
+ /* --  profile -- */
+
+#profile {
+  text-align: left;
+  padding: 0 20px;
+  border-radius: 20px;
+}
+
+#profile h2 {
+  text-align: center;
+  color: #e4b500;
+  margin-bottom: 30px;
+  font-size: 1.7rem;
+  letter-spacing: 2px;
+}
+
+#profile p{
+    margin-bottom: 10px;
+}
+
+#profile p strong{
+    color: rgb(0, 216, 216);
+}
+
+.btn-edit {
+  background:  rgb(0, 20, 17);
+  border: 1px solid rgb(0, 216, 216);
+  color: rgb(0, 216, 216);
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 25px 0;
+  transition: 0.3s ;
+}
+
+.btn-edit:hover {
+  background: rgb(0, 216, 216);
+  color: #111;
+}
+
+
+ /* --- orders --  */
+
+
+
+.order-card,
+.booking-card,
+.cart-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgb(0, 216, 216);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: 0.2s;
+}
+
+.order-card:hover,
+.booking-card:hover {
+  transform: translateY(-1px);
+}
+
+.order-header,.booking-header {
+  color: rgb(0, 216, 216);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.status {
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.status.delivered,.status.completed {
+  background: #1b8a4d;
+}
+
+.status.confirmed {
+     background: rgb(0, 167, 167);
+}
+
+.status.pending {
+  background: #d19a00;
+}
+
+.order-card strong {
+    color: rgb(0, 216, 216) ;
+}
+
+.order-card p {
+    margin-bottom: 10px;
+}
+
+
+.order-card table{
+    text-align: left;
+}
+
+.order-card table th,td {
+    padding: 5px 10px;
+}
+
+.order-card table th {
+    color: rgb(0, 216, 216);
+}
+
+.order-card table td.price{
+    text-align: right;
+}
+
+.order-card table td.total{
+    text-align: right;
+    color: rgb(0, 216, 216);
+}
+
+.booking-card h3 {
+    color: rgb(0, 216, 216);
+    margin-bottom: 10px;
+}
+
+.booking-card p {
+    margin-bottom: 5px;
+}
+
+.booking-card strong{
+    color: rgb(0, 216, 216);
+}
+
+.cart-card {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.cart-items-heading{
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.1rem;
+}
+
+.cart-card .item-card{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid rgb(0, 216, 216);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.cart-card .item-card .item-header{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+}
+
+.cart-card .item-card .item-header img{
+    width: 100px;
+}
+
+.quantity-control {
+  border: 1px solid rgb(0, 216, 216);
+}
+
+.quantity-control .btn-qty {
+  background: rgb(0, 216, 216);
+  color: #fff;
+  border: none;
+  width: 35px;
+  height: 35px;
+  font-size: 1rem;
+}
+
+.quantity-control .btn-qty:hover {
+  background: #d19a00;
+  color: white;
+}
+
+.quantity-control .quantity-input {
+  width: 40px;
+  text-align: center;
+  font-size: 1rem;
+  border: none;
+  background: transparent;
+  color: white;
+}
+
+.cart-card p strong{
+    color: rgb(0, 216, 216);
+}
+
+
+.btn-checkout {
+  width: 200px;
+  background:  rgb(0, 20, 17);
+  border: 1px solid rgb(0, 216, 216);
+  color: rgb(0, 216, 216);
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-weight: bold;
+  transition:  0.3s ease;
+}
+
+.btn-checkout:hover {
+  background: rgb(0, 216, 216);
+  color: #111;
+}
+
+ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+.content h2 {
+  margin-bottom: 25px;
+  color: #e4b500;
+  text-align: center;
+  font-size: 1.7rem;
+  letter-spacing: 2px;
+}
+

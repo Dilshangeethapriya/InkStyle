@@ -11,7 +11,6 @@ html{
 }
 
 body{
-    background-color: ghostwhite;
     overflow-x: hidden;
     background: url(../images/booking/bookingBg.png) center center/cover fixed;
 }
@@ -35,7 +34,7 @@ body{
 }
 .booking-container h1{
     font-size: 2.3rem;
-    color: white;
+    color: #e4b500;
     margin-bottom: 10px;
 }
 
@@ -65,25 +64,30 @@ body{
 .booking-inputs{
     height: 40px;
     width: 100%;
-    background-color: rgb(219, 240, 240);
-    border-radius: 5px;
+    background-color: rgb(214, 255, 255);
+    border-radius: 8px;
+}
+
+.extra-info{
+    width: 100%;
+    background-color: rgb(214, 255, 255);
+    border-radius: 8px; 
 }
 
 .submit-btn {
-    background-color: teal;
+    background-color: #e4b500;
     color: white;
     padding: 12px;
     font-size: 1.1rem;
     font-weight: bold;
-    border-radius: 10px;
+    border-radius: 8px;
     border: none;
     cursor: pointer;
     transition: 0.3s;
-    align-items: center;
 }
 
 .submit-btn:hover {
-    background-color: #006666;
+    background-color: #ffcc00;
 }
 
 

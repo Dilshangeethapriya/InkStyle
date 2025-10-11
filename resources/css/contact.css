@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=Karla:ital,wght@0,200..800;1,200..800&family=Noto+Color+Emoji&display=swap');
+
+html{
+      scroll-behavior: smooth;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    font-family: "Alan Sans", sans-serif;
+}
+
+body{
+    overflow-x: hidden;
+    background: url("../images/login.jpg") center center/cover fixed;
+}
+
+section{
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-section { 
+  color: #fff;
+  padding: 80px 10%;
+}
+
+.contact-container {
+  display: flex;
+  gap: 60px;
+  justify-content: center;
+  background-color: rgba(0, 20, 17, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+}
+
+.contact-info {
+  width: 400px;
+  min-width: 300px;
+  margin: 15px;
+}
+
+.contact-info h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #e4b500;
+}
+
+.contact-info .intro-text {
+  font-size: 0.95rem;
+  color: white;
+  margin-bottom: 25px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.info-item i {
+  font-size: 1.4rem;
+  color: rgb(0, 216, 216);
+}
+
+.info-item h4 {
+  font-weight: 600;
+  color: white;
+}
+
+.info-item p {
+  font-size: 0.95rem;
+  color: white;
+}
+
+.working-hours {
+  margin-top: 25px;
+}
+
+.working-hours h3 {
+  color: #e4b500;
+  margin-bottom: 10px;
+}
+
+.working-hours ul {
+  list-style: none;
+  padding: 0;
+}
+
+.working-hours li {
+  margin-bottom: 5px;
+  color: white;
+}
+
+
+.social-links {
+  margin-top: 25px;
+}
+
+.social-links a {
+  color: rgb(0, 216, 216);
+  font-size: 1.5rem;
+  margin-right: 15px;
+  transition: 0.3s;
+}
+
+.social-links a:hover {
+  color: white;
+}
+
+.contact-form {
+  width: 400px;
+  min-width: 300px;
+  background-color: #151515ad;
+  padding: 30px;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.contact-form h2 {
+  color: #e4b500;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #0e0e0e;
+  color: white;
+  font-size: 0.95rem;
+}
+
+
+.send-btn {
+  background-color: rgb(0, 216, 216);
+  color: #000;
+  width: 100%;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.send-btn:hover {
+  background-color: teal;
+  color: white;
+}
+
+
+@media (max-width: 920px) {
+
+  .contact-section { 
+        padding: 100px 10%;
+    }
+
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 0;
+  }
+
+  .contact-info{
+    width: 80%;
+  }
+
+  .contact-form {
+    width: 100%;
+  }
+}

@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Store - InkStyle by Dinu</title>
-    <link rel="stylesheet" href="./resources/css/product.css">
+    <title>Edit Profile - Inkstyle by Dinu</title>
     <link rel="stylesheet" href="./resources/css/header.css">
     <link rel="stylesheet" href="./resources/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <link rel="stylesheet" href="./resources/css/fab_btn.css">
+    <link rel="stylesheet" href="./resources/css/editProfile.css">
 </head>
 <body>
     <header class="main-header" id="main-header">
@@ -47,39 +46,55 @@
             </ul>
          </nav>
     </header>
-
-   
-   <section class="product-details-section">
-
-    <div class="product-details-container">
-      <div class="product-image">
-        <img src="./resources/images/Store/shampoo.jpg" alt="Hair Shampoo">
-      </div>
-      <div class="product-info">
-        <h1>Hair Shampoo</h1>
-        <p class="product-price">800.00 LKR</p>
-        <p class="product-description">
-          Experience soft, shiny, and healthy hair with our premium Hair Shampoo.
-          Formulated with natural extracts and gentle cleansing agents, it nourishes
-          your scalp and protects your hair from damage while maintaining natural moisture.
-        </p>
-
-        <div class="product-controls">
-         <form action="./product.html" method="get">
-                          <label for="quantity">Quantity:</label>
-          <input type="number" id="quantity" name="quantity" min="1" value="1">
-        </div>
-
-        <button type="submit" class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
-         </form>
-
-      </div>
-    </div>
- 
-        
-   </section>
      
-       </a>
+    <section class="edit-profile">
+         <div id="profile" class="content active">
+         <h2>Profile</h2>
+                         
+        <div class="edit-profile-card">
+        <form action="#" method="post">
+                <div class="form-group">
+                  <label for="name"> Full Name</label>
+                  <input type="text" id="name" name="name" value="Dilshan Geethappriya" required>
+                </div>
+        
+                <div class="form-group">
+                   <label for="phone"> Phone</label>
+                   <input type="tel" id="phone" name="phone" value="077 3834851" required>
+                </div>
+        
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" value="dilshan.geethappriya@gmail.com" required>
+                </div>
+        
+                <div class="form-group">
+                  <label for="address">Address</label>
+                  <input type="address" id="address" name="address" value=" No 05, Sumithrarama Road, Ewariyawaththa, Katunayake" required>
+                </div>
+
+                 <div class="form-group">
+                  <label for="oldPassword">Old Password</label>
+                  <input type="password" id="oldPassword" name="oldPassword" placeholder="Enter your old password" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="password">New Password</label>
+                  <input type="password" id="password" name="password" placeholder="Enter new password">
+                </div>
+
+                <div class="form-group">
+                  <label for="confirm"> Confirm  Password</label>
+                  <input type="password" id="confirm" name="confirm" placeholder="Confirm new password">
+                </div>
+
+             
+                 <button type="submit" class="save-btn">Save Changes</button>
+       </form>
+      </div>
+                  
+    </section>
+                         
     <footer id="footer">
         <div class="footer-container">
            <div class="footer-logo">
@@ -115,14 +130,14 @@
                    <i class="fa-solid fa-location-dot"></i>
                    <p>18/A, Delgoda, Gampaha, Srilanka</p>
                 </div>
-                  
+                               
            </div>
         </div>
         <div class="copy-rights-note">
-          <p> © 2025 All Rights Reserved @ InkStyle by Dinu | Designed & Developed by Dilshan Geethappriya</p><a href="./termsAndConditions.html">Terms and Conditions</a>
+          <p> © 2025 All Rights Reserved @ InkStyle by Dinu | Designed & Developed by Dilshan Geethappriya. </p><a href="./termsAndConditions.html">Terms and Conditions</a>
         </div>
     </footer>
- 
-  <script src="./resources/js/header.js"></script>
+    <script src="./resources/js/userPage.js"></script>
+    <script src="./resources/js/header.js"></script>
 </body>
 </html>

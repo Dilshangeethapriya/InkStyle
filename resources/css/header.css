@@ -42,61 +42,142 @@
     justify-content: space-around;
 }
 
-.nav-link{
+.nav-list .nav-link{
     margin: auto;
     font-size: 1.5rem;
     text-decoration: none;
     color: teal;
+    transition: 0.3s;
 }
 
-.nav-link:hover{
-    font-size: 1.51rem;
+.nav-list .nav-link:hover{
     color: white;
 }
 
-.shop-btn{
+
+
+.nav-list .shop-btn{
     padding: 5px 15px;
     border: 0.5px solid teal;
-    border-radius: 20px; 
+    border-radius: 20px;
+    transition: 0.3s; 
 }
 
-.shop-btn:hover, .user-btn:hover{
+.nav-list .shop-btn:hover, .user-btn:hover{
     background-color: teal;
     color: black;
 }
 
-.booking-btn{
+.nav-list .booking-btn{
     padding: 5px 15px;
     background-color: teal;
     border: 0.5px solid white;
     color: rgb(0, 20, 17);
     border-radius: 20px;
+    transition: 0.3s;
 }
 
-.booking-btn:hover{
+.nav-list .booking-btn:hover{
     padding: 5px 15px;
     background-color: rgb(255, 93, 52);
     border: 0.5px solid white;
     color: white;
+    transition: 0.3s;
 }
 
-.user-btn{
-    padding: 5px 5px;
+.nav-list .user-btn{
+    padding: 10px 5px;
     border: 0.5px solid teal;
     border-radius: 30px;
 }
 
-@media only screen and (max-width: 1100px) {
+.nav-list i{
+    font-size: 2rem;
+    color: teal;
+    cursor: pointer;
+}
+
+.nav-menu-icon{
+    display: none;
+}
+
+
+/* -------- Side bar Nav --------*/
+
+.nav-side-bar{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 300px;
+    z-index: 20;
+    background-color: rgba(0, 20, 17, 0.998);
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+    padding-left: 20px;
+}
+
+.nav-side-bar .header-container{
+   margin: 30px auto;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+ .nav-side-bar li{
+    width: 100%;
+    list-style: none;
+ }
+
+ .nav-side-bar .nav-link{
+    width: 100%;
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: teal;
+    transition: 0.3s;
+ }
+
+ .nav-side-bar i{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2rem;
+    color: teal;
+    cursor: pointer;
+ }
+
+
+
+
+
+
+  /* ------ Media Links ---- */
+
+
+
+@media only screen and (max-width: 1200px) {
 
 .nav-menu-icon{
     display: flex;
 }
-.nav-list{
-    width: 0;
-}
- .nav-link{
-    width: 0;
-    display:none;
+
+.hideOnMobile {
+    display: none;
  }
-  
+
+.nav-menu-icon{
+    display: flex;
+}
+}
+
+
+@media only screen and (max-width: 430px) {
+
+.nav-side-bar{
+    width: 100%;
+}
+
 }
