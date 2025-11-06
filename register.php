@@ -1,9 +1,54 @@
+
+<?php
+
+include "./includes/dbConn.php";
+
+if(isset($_POST['register_btn'])){
+  
+  $password = $_POST['password'];
+  $confirm = $_POST['confirm'];
+
+  if($password !== $confirm){
+    echo '<script>
+            alert("Password and Confirm Password does not match!");
+            window.history.back();
+          </script>';
+
+    exit();
+    }
+
+  $name    = mysqli_real_escape_string($conn, $_POST['name']);
+  $phone   = mysqli_real_escape_string($conn, $_POST['phone']);
+  $email   = mysqli_real_escape_string($conn, $_POST['email']);
+  $address = mysqli_real_escape_string($conn, $_POST['address']);
+  $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+  $sql = "INSERT INTO customer(fullName,phone,email,address,password) VALUES ('$name','$phone','$email','$address','$password')";
+
+  if(mysqli_query($conn,$sql)){
+     echo '<script>
+            alert("Registration Successfull!");
+            window.location.href = "./login.php";
+            </script>';
+  }else{
+    echo "Error: ". mysqli_error($conn);
+  }
+  
+}
+
+
+mysqli_close($conn);
+ ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register - InkStyle by Dinu</title>
+  <title>Register | InkStyle by Dinu</title>
+  <link rel="icon" type="image/x-icon" href="./resources/images/inkstyle_favicon.ico">
   <link rel="stylesheet" href="./resources/css/register.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
@@ -14,7 +59,7 @@
       <h1>Create Account</h1>
       <p>Join InkStyle by Dinu and experience where ink meets style.</p>
 
-      <form class="register-form" action="#" method="POST">
+      <form class="register-form" action="register.php" method="POST">
         <div class="form-group">
           <label for="name"><i class="fa-solid fa-user"></i> Full Name</label>
           <input type="text" id="name" name="name" placeholder="Enter your full name" required>
@@ -45,12 +90,14 @@
           <input type="password" id="confirm" name="confirm" placeholder="Confirm password" required>
         </div>
 
-        <button type="submit" class="register-btn">Register</button>
+        <button type="submit" class="register-btn" id="register_btn" name="register_btn">Register</button>
       </form>
 
-      <p class="login-link">Already have an account? <a href="./login.html">Login here</a></p>
+      <p class="login-link">Already have an account? <a href="./login.php">Login here</a></p>
       
     </div>
   </section>
 </body>
 </html>
+
+

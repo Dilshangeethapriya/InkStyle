@@ -21,11 +21,12 @@ section{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .contact-section { 
   color: #fff;
-  padding: 80px 10%;
+  padding: 120px 10%;
 }
 
 .contact-container {
@@ -162,6 +163,51 @@ section{
 }
 
 
+.faq-container{
+  background-color:#151515bd;
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  padding: 10px;
+  min-width: 900px;
+  margin-top: 50px;
+}
+
+.faq-container h2 {
+  color: #e4b500;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+}
+
+.faq-item{
+  padding: 20px;
+  margin: 5px 0;
+  border: 1px solid rgba(255, 255, 255, 0.301);
+  border-radius: 8px;
+}
+
+
+.faq-question, .faq-answer{
+  display: flex;
+  gap: 10px;
+}
+
+.faq-question{
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+
+.faq-question i{
+  color: #EF4444;
+  font-size: 1.2rem;
+}
+
+.faq-answer i{
+  color: #10B981;
+  font-size: 1.2rem;
+}
+
+
 @media (max-width: 920px) {
 
   .contact-section { 
@@ -182,5 +228,9 @@ section{
 
   .contact-form {
     width: 100%;
+  }
+
+  .faq-container{
+    min-width: 500px;
   }
 }

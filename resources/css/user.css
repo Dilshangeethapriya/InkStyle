@@ -111,7 +111,25 @@ body {
 
 .btn-edit:hover {
   background: rgb(0, 216, 216);
-  color: #111;
+  color: white;
+}
+
+.btn-logout {
+  background:  rgb(0, 216, 216);
+  border: 1px solid rgb(0, 216, 216);
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 25px 0;
+  transition: 0.3s ;
+  margin-left: 40px;
+}
+
+.btn-logout:hover {
+  background: rgb(0, 20, 17);
+  color: rgb(0, 216, 216);
 }
 
 
@@ -215,6 +233,7 @@ body {
     display: flex;
     justify-content: space-around;
     font-size: 1.1rem;
+    font-weight: 600;
 }
 
 .cart-card .item-card{
@@ -240,7 +259,8 @@ body {
 }
 
 .quantity-control {
-  border: 1px solid rgb(0, 216, 216);
+  background-color: rgba(0, 216, 216,0.1);
+  border-radius: 8px;
 }
 
 .quantity-control .btn-qty {
@@ -250,6 +270,16 @@ body {
   width: 35px;
   height: 35px;
   font-size: 1rem;
+}
+
+.quantity-control .btn-qty.minus {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.quantity-control .btn-qty.plus {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .quantity-control .btn-qty:hover {
@@ -268,6 +298,20 @@ body {
 
 .cart-card p strong{
     color: rgb(0, 216, 216);
+}
+
+
+.action-btns .product-remove{
+  padding: 10px;
+  background-color: #ff3c3c ;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+.action-btns .product-remove:hover{
+  background-color: #ff5555 ;
 }
 
 

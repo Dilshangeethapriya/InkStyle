@@ -1,51 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InkStyle by Dinu</title>
-    <link rel="stylesheet" href="./resources/css/index.css">
-    <link rel="stylesheet" href="./resources/css/header.css">
-    <link rel="stylesheet" href="./resources/css/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-</head>
-<body>
-    <header class="main-header" id="main-header">
-         <a href="./index.html">
-             <div class="header-container">
-              <img class="header-logo" src="./resources/images/headerLogo.png" alt="">
-             </div>    
-         </a>
-         <nav class="nav-bar">
-              <ul class="nav-side-bar">
-                <li onclick=hideSidebar()><i class="fa-solid fa-xmark"></i></li>
-                 <li><a class="nav-link" href="./index.html" >
-                  <div class="header-container">
-                      <img class="header-logo" src="./resources/images/headerLogo.png" alt="">
-                  </div>  
-                 </a></li>
-                <li><a class="nav-link" href="./index.html" >Home</a></li>
-                <li><a class="nav-link" href="./index.html#about-us">About Us</a></li>
-                <li><a class="nav-link" href="./index.html#services-and-prices">Services</a></li>
-                <li><a class="nav-link" href="./contact.html">Contact</a></li>
-                <li><a class="nav-link" href="./store.html">Store</a></li>
-                <li><a class="nav-link" href="./booking.html">Book Now</a></li>
-                <li><a class="nav-link" href="./login.html">Login</a></li>
-                <li><a class="nav-link" href="./user.html">Account</a></li>
-               </ul>
-            <ul class="nav-list">
-                <li class="hideOnMobile"><a class="nav-link" href="./index.html" >Home</a></li>
-                <li class="hideOnMobile"><a class="nav-link" href="./index.html#about-us">About Us</a></li>
-                <li class="hideOnMobile"><a class="nav-link" href="./index.html#services-and-prices">Services</a></li>
-                <li class="hideOnMobile"><a class="nav-link" href="./contact.html">Contact</a></li>
-                <li class="hideOnMobile"><a class="nav-link" href="./login.html">Login</a></li>
-                <li class="hideOnMobile"><a class="nav-link  shop-btn" href="./store.html">Store</a></li>
-                <li class="hideOnMobile"><a class="nav-link booking-btn" href="./booking.html">Book Now</a></li>
-                <li class="hideOnMobile"><a class="nav-link  user-btn" href="./user.html"><i class="fa-solid fa-user"></i></a></li>
-                <li class="nav-menu-icon" onclick=showSidebar()><i class="fa-solid fa-bars"></i></li>
-            </ul>
-         </nav>
-    </header>
+<?php
+  $title = "InkStyle by Dinu";
+  $cssFile = "index.css";
+
+  include "./includes/header.php";
+ ?>
     <div class="image-slider">
         <div class="slider-text">
             <h1>Where Ink meets Style</h1>
@@ -182,49 +140,11 @@
         </div>
       </div>
     </section>
-    <footer id="footer">
-        <div class="footer-container">
-           <div class="footer-logo">
-               <img src="./resources/images/mainLogo.png" alt="logo">
-                <div class="social-media">
-                   <a href="http://facebook.com/"><i class="fa-brands fa-square-facebook"></i></a>
-                   <a href="http://instagram.com/"><i class="fa-brands fa-instagram"></i></a>
-                   <a href="https://www.tiktok.com/@dinu_tattoos"><i class="fa-brands fa-tiktok"></i></a>
-                </div>
-           </div>
-           <div class="quick-links">
-             <h3>Quick Links</h3>
-                <ul class="quick-link-list">
-                <li><a class="quick-link" href="#">Home</a></li>
-                <li><a class="quick-link" href="#about-us">About Us</a></li>
-                <li><a class="quick-link" href="#services-and-prices">Services & Prices</a></li>
-                <li><a class="quick-link" href="./contact.html">Contact</a></li>
-                <li><a class="quick-link" href="./store.html">Store</a></li>
-                <li><a class="quick-link" href="./booking.html">Book Now</a></li>
-            </ul>
-           </div>
-           <div class="footer-contact">
-              <h3>Contacts</h3>
-                <div class="contact-item">
-                   <i class="fa fa-phone-square" aria-hidden="true"></i>
-                   <p>+94 70 139 0925</p>
-                </div>
-                <div class="contact-item">
-                   <i class="fa fa-envelope" aria-hidden="true"></i>
-                   <p>hello@inkstylebydinu.lk</p>
-                </div>
-                <div class="contact-item">
-                   <i class="fa-solid fa-location-dot"></i>
-                   <p>18/A, Delgoda, Gampaha, Srilanka</p>
-                </div>
-                               
-           </div>
-        </div>
-        <div class="copy-rights-note">
-          <p> © 2025 All Rights Reserved @ InkStyle by Dinu | Designed & Developed by Dilshan Geethappriya. </p><a href="./termsAndConditions.html">Terms and Conditions</a>
-        </div>
-    </footer>
 
+
+<?php
+  include "./includes/footer.php";
+ ?>
     <script src="./resources/js/header.js"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    z-index: 1;
+    z-index: 990;
     padding: 10px;
     max-height: 80px;
 }
@@ -138,6 +138,10 @@
     font-size: 1.5rem;
     color: teal;
     transition: 0.3s;
+ }
+
+ .nav-side-bar .nav-link:hover{
+    color: white;  
  }
 
  .nav-side-bar i{
