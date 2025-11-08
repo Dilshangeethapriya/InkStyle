@@ -1,5 +1,6 @@
 
 <?php
+  session_start();
   $title = "Complete Your Payment | InkStyle by Dinu";
   $cssFile = "checkout.css";
 

@@ -11,7 +11,7 @@ if(isset($_POST['login_btn'])){
 
   $results = mysqli_query($conn, $sql);
   
-  if(mysqli_num_rows($results) > 0){
+  if(mysqli_num_rows($results) === 1){
     $row = mysqli_fetch_assoc($results);
     $_SESSION['userID'] = $row['id'];
     $_SESSION['userEmail'] = $row['email'];

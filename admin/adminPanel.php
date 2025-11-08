@@ -1,7 +1,10 @@
     <?php
+      session_start();
+
       $title = "Admin Panel | InkStyle by Dinu";
       $pageTitle = "Admin Panel";
       include "../includes/admin/adminHeader.php";
+      include "../includes/dbConn.php";
     ?>
 
 <main class="main-container">
@@ -71,35 +74,36 @@
                 <p>IMAGE</p>
                 <p>ACTIONS</p>
             </div>
+            <?php
+                $fetchProductsQuery = "SELECT * FROM products";
+                $fetchProductsResult = mysqli_query($conn, $fetchProductsQuery);
+
+                if(mysqli_num_rows($fetchProductsResult) > 0){
+                   while($products = mysqli_fetch_assoc($fetchProductsResult)){
+            ?>
                 <div class="products-list-item">
-                    <p>1</p>
-                    <p>Hair Shampoo</p>
-                    <p>800.LKR</p>
-                    <p>120</p>
-                    <p class="item-description">Experience soft, shiny, and healthy hair with our premium Hair Shampoo. Formulated with natural extracts and gentle cleansing agents, it nourishes your scalp and protects your hair from damage while maintaining natural moisture.</p>
+                    <p><?php echo $products['productID'] ; ?></p>
+                    <p><?php echo htmlspecialchars($products['productName']); ?></p>
+                    <p>LKR <?php echo number_format($products['price'],2); ?></p>
+                    <p><?php echo $products['stock']; ?></p>
+                    <p class="item-description"><?php echo htmlspecialchars($products['description']); ?></p>
                     <div class="product-image">
-                        <img src="../resources/images/Store/shampoo.jpg" alt="shampoo">
+                        <img src="<?php echo "." . htmlspecialchars($products['image']); ?>" alt="shampoo">
                     </div>
                     <div class="action-btns">
-                        <a href="#"><button class="product-update" id="product-update-1"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                        <a href="#"><button class="product-delete" id="product-delete-1"><i class="fa-solid fa-trash"></i> Delete</button></a>
-                    </div>
+                        <a href="./updateProduct.php?productID=<?php echo $products['productID'] ; ?>"><button class="product-update" id="product-update"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
+                        <button class="product-delete" id="product-delete" onclick="deleteProduct(<?php echo $products['productID'] ; ?>)"><i class="fa-solid fa-trash"></i> Delete</button>
+                   </div>
                 </div>
-                <div class="products-list-item">
-                    <p>2</p>
-                    <p>Tattoo Balm</p>
-                    <p>1500.LKR</p>
-                    <p>55</p>
-                    <p class="item-description">Essential aftercare. This natural healing balm reduces redness, soothes irritation, and accelerates the skin's recovery process for vibrant, long-lasting tattoos. Safe for sensitive skin.</p>
-                    <div class="product-image">
-                        <img src="../resources/images/Store/tatooBalm.jpg" alt="balm">
-                    </div>
-                    <div class="action-btns">
-                        <a href="#"><button class="product-update" id="product-update-1"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                        <a href="#"><button class="product-delete" id="product-delete-1"><i class="fa-solid fa-trash"></i> Delete</button></a>
-                    </div>
-                </div>
-            
+                 <?php
+
+
+                        }
+                   }
+                   else{
+                       echo '<div class="status-message"><p>No products found in the database.</p></div>';
+                   }
+                 ?>
         </div>
          <div class="input-group">
             <a href="./addProduct.php">
@@ -119,34 +123,44 @@
             <div class="services-list-header">
                 <p>ID</p>
                 <p>NAME</p>
+                <p>SERVICE CATEGORY</p>
+                <p>SIZE(TATTOO)</p>
                 <p>PRICE</p>
                 <p>SERVICE TIME</p>
                 <p>ACTIONS</p>
             </div>
+             <?php
+                $fetchServicesQuery = "SELECT * FROM services";
+                $fetchServicesResult = mysqli_query($conn, $fetchServicesQuery);
+
+                if(mysqli_num_rows($fetchServicesResult) > 0){
+                   while($services = mysqli_fetch_assoc($fetchServicesResult)){
+            ?>
             <div class="services-list-item">
-                    <p>1</p>
-                    <p>Men's Hair Cut</p>
-                    <p>1000.00 LKR</p>
-                    <p>30 minutes</p>
+                    <p><?php echo $services['serviceID'] ; ?></p>
+                    <p><?php echo htmlspecialchars($services['serviceName']); ?></p>
+                    <p><?php echo htmlspecialchars($services['serviceCategory']); ?></p>
+                    <p><?php echo htmlspecialchars($services['tattooSize']?? 'N/A'); ?></p>
+                    <p>LKR <?php echo number_format($services['estimatedPrice'],2); ?></p>
+                    <p><?php echo $services['estimatedServiceTime'] ; ?> minutes</p>
                     <div class="action-btns">
-                        <a href="#"><button class="service-update" id="service-update-1"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                        <a href="#"><button class="service-delete" id="service-delete-1"><i class="fa-solid fa-trash"></i> Delete</button></a>
+                        <a href="./updateService.php?serviceID=<?php echo $services['serviceID'] ; ?>"><button class="service-update" id="service-update"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
+                        <button class="service-delete" id="service-delete" onclick="deleteService(<?php echo $services['serviceID'] ; ?>)" ><i class="fa-solid fa-trash"></i> Delete</button>
                     </div>
              </div>
-                 <div class="services-list-item">
-                    <p>2</p>
-                    <p>Women's Hair Cut</p>
-                    <p>1000.00 LKR</p>
-                    <p>45 minutes</p>
-                    <div class="action-btns">
-                        <a href="#"><button class="service-update" id="service-update-1"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                        <a href="#"><button class="service-delete" id="service-delete-1"><i class="fa-solid fa-trash"></i> Delete</button></a>
-                    </div>
-             </div>
-            
+             <?php
+
+
+                        }
+                   }
+                   else{
+                       echo '<div class="status-message"><p>No services found in the database.</p></div>';
+                   }
+                 ?>
         </div>
+            
          <div class="input-group">
-            <a href="#">
+            <a href="./addService.php">
             <button class="add-service-btn">
                 + Add New Service
             </button>
@@ -155,7 +169,7 @@
     </section>
 
 
-    <section id="admin-orders">
+ <section id="admin-orders">
     <div class="main-title">
         <h1 class="font-weight-bold">Orders</h1>
     </div>
@@ -221,9 +235,9 @@
                 
             </div>
     </div>
-    </section>
+</section>
 
-    <section id="admin-bookings">
+ <section id="admin-bookings">
     <div class="main-title">
         <h1 class="font-weight-bold">Bookings</h1>
     </div>
@@ -280,10 +294,10 @@
                 </a> 
             </div>
     </div>
-    </section>
+</section>
 
 
-    <section id="admin-users">
+ <section id="admin-users">
     <div class="main-title">
         <h1 class="font-weight-bold">Users</h1>
     </div>
@@ -371,10 +385,10 @@
                   
             </div>
     </div>
-    </section>
+</section>
 
 
-    <section id="admin-reviews">
+<section id="admin-reviews">
     <div class="main-title">
         <h1 class="font-weight-bold">Reviews</h1>
     </div>
@@ -397,7 +411,7 @@
     <div class="review-list">            
         <div class="review-list-header">
             <p>REVIEW ID</p>
-            <p>PRODUCT NAME</p>
+            <p>PRODUCT/SERVICE NAME</p>
             <p>REVIEW DESCRIPTION</p>
             <p>RATING</p>
             <p>DATE</p>
@@ -430,9 +444,9 @@
                 </div>  
         </div>
     </div>
-    </section>
+</section>
 
-    <section id="admin-inquiries">
+<section id="admin-inquiries">
     <div class="main-title">
         <h1 class="font-weight-bold">Inquiries</h1>
     </div>
@@ -516,13 +530,18 @@
   
             </div>
     </div>
-    </section>
+</section>
 
 
 </main>
-
+<?php
+   mysqli_close($conn);
+ ?>
 </div>
  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
  <script src="../resources/js/admin/dashboard.js"></script>
+ <script src="../resources/js/admin/sidebar.js"></script>
+ <script src="../resources/js/admin/productsSection.js"></script>
+ <script src="../resources/js/admin/servicesSection.js"></script>
 </body>
 </html>

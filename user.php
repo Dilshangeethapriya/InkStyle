@@ -26,15 +26,15 @@
 
                                    $userProfileResults = mysqli_query($conn, $userProfileQuery);
 
-                                   if(mysqli_num_rows($userProfileResults) > 0){
+                                   if(mysqli_num_rows($userProfileResults) === 1){
                                         $row = mysqli_fetch_assoc($userProfileResults);
                          
                                 
                            ?>
-                           <p><strong>Name:</strong> <?php echo $row['fullName'] ?></p>
-                           <p><strong>Email:</strong> <?php echo $row['email'] ?></p>
-                           <p><strong>Phone:</strong> <?php echo $row['phone'] ?></p>
-                           <p><strong>Address:</strong> <?php echo $row['address'] ?></p>
+                           <p><strong>Name:</strong> <?php echo htmlspecialchars($row['fullName']); ?></p>
+                           <p><strong>Email:</strong> <?php echo htmlspecialchars($row['email']); ?></p>
+                           <p><strong>Phone:</strong> <?php echo htmlspecialchars($row['phone']); ?></p>
+                           <p><strong>Address:</strong> <?php echo htmlspecialchars($row['address']); ?></p>
                            <button onclick="window.location.href='./editProfile.php'" class="btn-edit">Edit Profile</button>
                            <button onclick="window.location.href='./logout.php'" class="btn-logout">Logout</button>
 

@@ -1,0 +1,192 @@
+      <div class="products-container">
+            <div class="product-card">
+                <a href="./product.php">
+                   <img src="./resources/images/Store/shampoo.jpg" alt="product image">
+                </a>
+                <div class="product-detail-container">
+                 <a href="./product.php">
+                  <div class="product-name-container">
+                  <h3 class="product-name">Hair Shampoo</h3>
+                  <p class="product-price">800.00 LKR</p>
+                 </div>
+                  </a>
+                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
+            </div>
+            <div class="product-card">
+                <a href="./product.html">
+                <img src="./resources/images/Store/conditioner.jpg" alt="product image">
+                </a>
+                <div class="product-detail-container">
+                    <a href="./product.html">
+                    <div class="product-name-container">
+                <h3 class="product-name">Hair Conditioner</h3>
+                <p class="product-price">1,000.00 LKR</p>
+                </div>
+                </a>
+                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
+            </div>
+            <div class="product-card">
+                <a href="./product.html">
+                <img src="./resources/images/Store/hairOil.jpg" alt="product image">
+                </a>
+                <div class="product-detail-container">
+                    <a href="./product.html">
+                    <div class="product-name-container">
+                <h3 class="product-name">Hair Oil</h3>
+                <p class="product-price">600.00 LKR</p>
+                </div>
+                </a>
+                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
+            </div>
+            <div class="product-card">
+                <a href="./product.html">
+                <img src="./resources/images/Store/cream.jpg" alt="product image">
+                </a>
+                <div class="product-detail-container">
+                    <a href="./product.html">
+                    <div class="product-name-container">
+                <h3 class="product-name">Moisturizing Cream</h3>
+                <p class="product-price">750.00 LKR</p>
+                </div>
+                </a>
+                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
+            </div>
+            <div class="product-card">
+                <a href="./product.html">
+                <img src="./resources/images/Store/tatooBalm.jpg" alt="product image">
+                </a>
+                <div class="product-detail-container">
+                    <a href="./product.html">
+                    <div class="product-name-container">
+                <h3 class="product-name">Tatoo Healing Balm</h3>
+                <p class="product-price">600.00 LKR</p>
+                </div>
+                </a>
+                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
+            </div>
+            <div class="product-card">
+                <a href="./product.html">
+                <img src="./resources/images/Store/bandages.jpg" alt="product image">
+                </a>
+                <div class="product-detail-container">
+                 <a href="./product.html">
+                <div class="product-name-container">
+                <h3 class="product-name">Tatoo Aftercare Bandages</h3>
+                <p class="product-price">350.00 LKR</p>
+                </div>
+                </a>
+                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
+            </div>
+         </div>
+
+
+          <h2>Hair Services</h2>
+  <div class="hair-cut-list">
+    <div class="service-item">
+      <h3>Men’s Haircut</h3>
+      <p>Price: 1,000 LKR</p>
+    </div>
+    <div class="service-item">
+      <h3>Women’s Haircut</h3>
+      <p>Price: 1,500 LKR</p>
+    </div>
+    <div class="service-item">
+      <h3>Kids’ Haircut</h3>
+      <p>Price: 800 LKR</p>
+    </div>
+    <div class="service-item">
+      <h3>Hair Wash and Blow Dry</h3>
+      <p>Price: 800 LKR</p>
+    </div>
+    <div class="service-item">
+      <h3>Beard Trim and Styling</h3>
+      <p>Price: 700 LKR</p>
+    </div>
+    <div class="service-item">
+      <h3>Head Massage</h3>
+      <p>Price: 1,200 LKR</p>
+    </div>
+  </div>
+  <h2>Tatoo Services</h2>
+  <table class="tatoo-price-table">
+    <tr>
+        <th>Body Area</th>
+        <th>Small (5cm x 5cm)</th>
+        <th>Medium (10cm x 10cm)</th>
+        <th>Large (15cm x 15cm)+ </th>
+    </tr>
+    <tr>
+        <td>Arm/Wrist</td>
+        <td>4,000 LKR</td>
+        <td>8,000 LKR</td>
+        <td>12,000 + LKR</td>
+    </tr>
+    <tr>
+        <td>Shoulder/Back</td>
+        <td>5,000 LKR</td>
+        <td>10,000 LKR</td>
+        <td>15,000 + LKR</td>
+    </tr>
+    <tr>
+        <td>Chest</td>
+        <td>6,000 LKR</td>
+        <td>12,000 LKR</td>
+        <td>18,000 + LKR</td>
+    </tr>
+    <tr>
+        <td>Leg/Thigh</td>
+        <td>5,000 LKR</td>
+        <td>10,000 LKR</td>
+        <td>16,000 + LKR</td>
+    </tr>
+    <tr>
+        <td>Neck</td>
+        <td>4,500 LKR</td>
+        <td>9,000 LKR</td>
+        <td>14,000 + LKR</td>
+    </tr>
+ 
+  </table>
+
+
+  <section class="our-work" id="our-work">
+      <h2>Our Work</h2> 
+      <div class="photo-gallery">
+        <div class="gallery-item">
+          <img src="./resources/images/ourWork/img1.jpg" alt="galleryImage">
+        </div>
+        <div class="gallery-item">
+          <img src="./resources/images/ourWork/img2.jpg" alt="galleryImage">
+        </div>
+        <div class="gallery-item">
+          <img src="./resources/images/ourWork/img3.jpg" alt="galleryImage">
+        </div>
+        <div class="gallery-item">
+          <img src="./resources/images/ourWork/img4.jpg" alt="galleryImage">
+        </div>
+        <div class="gallery-item">
+          <img src="./resources/images/ourWork/img5.jpg" alt="galleryImage">
+        </div>
+        <div class="gallery-item">
+          <img src="./resources/images/ourWork/img6.jpg" alt="galleryImage">
+        </div>
+        <div class="gallery-item">
+          <img src="./resources/images/ourWork/img7.jpg" alt="galleryImage">
+        </div>
+        <div class="gallery-item">
+          <img src="./resources/images/ourWork/img8.jpg" alt="galleryImage">
+        </div>
+        <div class="gallery-item">
+          <img src="./resources/images/ourWork/img9.jpg" alt="galleryImage">
+        </div>
+        <div class="gallery-item">
+          <img src="./resources/images/ourWork/img10.jpg" alt="galleryImage">
+        </div>
+      </div>
+    </section>

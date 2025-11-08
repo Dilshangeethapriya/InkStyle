@@ -1,8 +1,10 @@
 <?php
+  session_start();
   $title = "InkStyle by Dinu";
   $cssFile = "index.css";
 
   include "./includes/header.php";
+  include "./includes/dbConn.php";
  ?>
     <div class="image-slider">
         <div class="slider-text">
@@ -32,73 +34,54 @@
          </div>
         </div>
     </section>
-    <section class="services-and-prices" id="services-and-prices">   
+ <section class="services-and-prices" id="services-and-prices">   
     <h2>Hair Services</h2>
-  <div class="hair-cut-list">
-    <div class="service-item">
-      <h3>Men’s Haircut</h3>
-      <p>Price: 1,000 LKR</p>
-    </div>
-    <div class="service-item">
-      <h3>Women’s Haircut</h3>
-      <p>Price: 1,500 LKR</p>
-    </div>
-    <div class="service-item">
-      <h3>Kids’ Haircut</h3>
-      <p>Price: 800 LKR</p>
-    </div>
-    <div class="service-item">
-      <h3>Hair Wash and Blow Dry</h3>
-      <p>Price: 800 LKR</p>
-    </div>
-    <div class="service-item">
-      <h3>Beard Trim and Styling</h3>
-      <p>Price: 700 LKR</p>
-    </div>
-    <div class="service-item">
-      <h3>Head Massage</h3>
-      <p>Price: 1,200 LKR</p>
-    </div>
+   <div class="hair-cut-list">
+      <?php 
+      $fetchHairServicesQuery = "SELECT * FROM services";
+      $fetchHairServicesResult = mysqli_query($conn, $fetchHairServicesQuery);
+
+      if(mysqli_num_rows($fetchHairServicesResult) > 0){
+        while($services = mysqli_fetch_assoc($fetchHairServicesResult)){
+          if($services['serviceCategory'] == 'Hair'){
+      ?>
+         <div class="service-item">
+           <h3><?php echo htmlspecialchars($services['serviceName']); ?></h3>
+           <p>LKR <?php echo number_format($services['estimatedPrice'], 2); ?></p>
+         </div>
+     <?php
+           }
+       }
+      }
+     ?>
   </div>
   <h2>Tatoo Services</h2>
   <table class="tatoo-price-table">
     <tr>
-        <th>Body Area</th>
-        <th>Small (5cm x 5cm)</th>
-        <th>Medium (10cm x 10cm)</th>
-        <th>Large (15cm x 15cm)+ </th>
+        <th>Tattoo Type</th>
+        <th>Size</th>
+        <th>Estimated Price</th>
+        <th>Estimated Duration</th>
     </tr>
-    <tr>
-        <td>Arm/Wrist</td>
-        <td>4,000 LKR</td>
-        <td>8,000 LKR</td>
-        <td>12,000 + LKR</td>
+    <?php
+      $fetchTattooServicesQuery = "SELECT * FROM services";
+      $fetchTattooServicesResult = mysqli_query($conn, $fetchTattooServicesQuery);
+
+    if(mysqli_num_rows($fetchTattooServicesResult) > 0){
+        while($services = mysqli_fetch_assoc($fetchTattooServicesResult)){
+          if($services['serviceCategory'] == 'Tattoo'){
+      ?>
+       <tr>
+        <td><?php echo htmlspecialchars($services['serviceName']); ?></td>
+        <td><?php echo isset($services['tattooSize'])? htmlspecialchars($services['tattooSize']): 'N/A'; ?></td>
+        <td>LKR <?php echo number_format($services['estimatedPrice'], 2); ?></td>
+        <td><?php echo $services['estimatedServiceTime']; ?> minutes</td>
     </tr>
-    <tr>
-        <td>Shoulder/Back</td>
-        <td>5,000 LKR</td>
-        <td>10,000 LKR</td>
-        <td>15,000 + LKR</td>
-    </tr>
-    <tr>
-        <td>Chest</td>
-        <td>6,000 LKR</td>
-        <td>12,000 LKR</td>
-        <td>18,000 + LKR</td>
-    </tr>
-    <tr>
-        <td>Leg/Thigh</td>
-        <td>5,000 LKR</td>
-        <td>10,000 LKR</td>
-        <td>16,000 + LKR</td>
-    </tr>
-    <tr>
-        <td>Neck</td>
-        <td>4,500 LKR</td>
-        <td>9,000 LKR</td>
-        <td>14,000 + LKR</td>
-    </tr>
- 
+     <?php
+             }
+           }
+       }
+     ?>
   </table>
   <div class="tatoo-item">
       <h3 >Custom Design</h3>
@@ -108,36 +91,22 @@
     <section class="our-work" id="our-work">
       <h2>Our Work</h2> 
       <div class="photo-gallery">
+        <?php
+          $fetchGalleryImagesQuery = "SELECT * FROM gallery";
+          $fetchGalleryImagesResult = mysqli_query($conn, $fetchGalleryImagesQuery);
+    
+          if(mysqli_num_rows($fetchGalleryImagesResult) > 0){
+            while($galleryImages = mysqli_fetch_assoc($fetchGalleryImagesResult)){
+              if(!empty($galleryImages['url'])){
+        ?>
         <div class="gallery-item">
-          <img src="./resources/images/ourWork/img1.jpg" alt="galleryImage">
+          <img src="<?php echo htmlspecialchars($galleryImages['url']); ?>" alt="galleryImage">
         </div>
-        <div class="gallery-item">
-          <img src="./resources/images/ourWork/img2.jpg" alt="galleryImage">
-        </div>
-        <div class="gallery-item">
-          <img src="./resources/images/ourWork/img3.jpg" alt="galleryImage">
-        </div>
-        <div class="gallery-item">
-          <img src="./resources/images/ourWork/img4.jpg" alt="galleryImage">
-        </div>
-        <div class="gallery-item">
-          <img src="./resources/images/ourWork/img5.jpg" alt="galleryImage">
-        </div>
-        <div class="gallery-item">
-          <img src="./resources/images/ourWork/img6.jpg" alt="galleryImage">
-        </div>
-        <div class="gallery-item">
-          <img src="./resources/images/ourWork/img7.jpg" alt="galleryImage">
-        </div>
-        <div class="gallery-item">
-          <img src="./resources/images/ourWork/img8.jpg" alt="galleryImage">
-        </div>
-        <div class="gallery-item">
-          <img src="./resources/images/ourWork/img9.jpg" alt="galleryImage">
-        </div>
-        <div class="gallery-item">
-          <img src="./resources/images/ourWork/img10.jpg" alt="galleryImage">
-        </div>
+        <?php
+              }
+            }
+          }
+        ?>
       </div>
     </section>
 

@@ -1,4 +1,5 @@
 <?php
+  session_start();
   $title = "Contact Us | InkStyle by Dinu";
   $cssFile = "contact.css";
 

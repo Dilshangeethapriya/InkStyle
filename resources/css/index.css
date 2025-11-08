@@ -115,11 +115,12 @@ section{
     display: flex;
     flex-direction: column;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background-color: rgb(219, 240, 240);
     justify-content: center;
-    padding-top: 20px;
+    padding: 20px 0;
   }
+
 
   .services-and-prices h2{
     margin: auto;
@@ -167,6 +168,7 @@ section{
    .tatoo-item h3{
     margin: auto;
     text-align: center;
+    padding-bottom: 10px;
   }
 
   .tatoo-item p{
@@ -257,6 +259,11 @@ section{
  .services-and-prices{
     height: 120vh;
  }
+
+ .photo-gallery{
+    columns: 3;
+  }
+
 }
 
 @media only screen and (max-width: 800px) {
@@ -291,6 +298,10 @@ section{
  .services-and-prices{
     height: 150vh;
  }
+
+ .photo-gallery{
+    columns: 2;
+  }
 }
 
 

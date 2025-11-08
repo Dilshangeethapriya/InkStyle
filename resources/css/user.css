@@ -89,9 +89,18 @@ body {
   letter-spacing: 2px;
 }
 
+.profile-card{
+  border: 1px solid teal;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 10px;
+}
+
 #profile p{
     margin-bottom: 10px;
-}
+    border-bottom: 3px solid #003b32;
+    padding: 10px;
+  }
 
 #profile p strong{
     color: rgb(0, 216, 216);
@@ -105,7 +114,7 @@ body {
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
-  margin: 25px 0;
+  margin: 10px 0;
   transition: 0.3s ;
 }
 
@@ -115,21 +124,20 @@ body {
 }
 
 .btn-logout {
-  background:  rgb(0, 216, 216);
-  border: 1px solid rgb(0, 216, 216);
+  background:  rgb(0, 167, 167);
+  border: 1px solid rgb(0, 167, 167);
   color: white;
   padding: 12px 25px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
-  margin: 25px 0;
+  margin: 10px 0;
   transition: 0.3s ;
   margin-left: 40px;
 }
 
 .btn-logout:hover {
-  background: rgb(0, 20, 17);
-  color: rgb(0, 216, 216);
+  background: rgb(0, 216, 216);
 }
 
 

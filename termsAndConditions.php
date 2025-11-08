@@ -1,4 +1,5 @@
   <?php
+       session_start();
        $title = "Terms and Conditions | InkStyle by Dinu";
        $cssFile = "termsAndConditions.css";
      

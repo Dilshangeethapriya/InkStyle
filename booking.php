@@ -1,5 +1,6 @@
 
   <?php
+    session_start();
     $title = "Book an Appointment | InkStyle by Dinu";
     $cssFile = "booking.css";
     include "./includes/header.php";

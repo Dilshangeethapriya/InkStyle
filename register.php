@@ -1,9 +1,10 @@
 
 <?php
-
+session_start();
 include "./includes/dbConn.php";
 
 if(isset($_POST['register_btn'])){
+
   
   $password = $_POST['password'];
   $confirm = $_POST['confirm'];
@@ -22,6 +23,18 @@ if(isset($_POST['register_btn'])){
   $email   = mysqli_real_escape_string($conn, $_POST['email']);
   $address = mysqli_real_escape_string($conn, $_POST['address']);
   $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+  $checkExistingEmailQuery = "SELECT email from customer WHERE email='$email'";
+  $checkExistingEmailResult = mysqli_query($conn, $checkExistingEmailQuery);
+
+  if(mysqli_num_rows($checkExistingEmailResult) > 0){
+    echo '<script>
+            alert("Email you entered is already registered! Enter a different email");
+            window.history.back();
+            </script>';
+
+    exit();
+  }
 
   $sql = "INSERT INTO customer(fullName,phone,email,address,password) VALUES ('$name','$phone','$email','$address','$password')";
 
