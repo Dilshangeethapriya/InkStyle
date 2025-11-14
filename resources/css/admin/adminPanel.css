@@ -121,7 +121,7 @@ body{
 }
 
 
- /* ---------- Common calsses ----- */
+ /* -------------- Common calsses ---------- */
 
  .search-group select,input {
      padding: 5px;
@@ -137,6 +137,58 @@ body{
  .search-group label {
      font-size: 1.1rem;
  }
+
+ .input-group button {
+     padding: 10px;
+     margin: 15px 0;
+     border : none;
+     outline: none;
+     border-radius: 8px;
+     background-color: #00af92;
+     color: white;
+     font-size: 1rem;
+
+ }
+
+
+
+ .input-group button:hover {
+     background-color: #00b698;
+ }
+
+ .action-btns {
+     display: flex;
+     gap: 5px;
+     justify-content: start; 
+     align-items: center;
+ }
+
+
+
+  .action-btns button {
+     color: white;
+     padding: 10px;
+     border-radius: 8px;
+     border: none;
+     cursor: pointer;
+     font-size: 0.8rem;
+ }
+
+        
+        
+.btn-update {
+    background-color: #00af92;
+}
+.btn-update:hover {
+    background-color: #00b698;
+}
+.btn-delete {
+    background-color: #d60000;
+}
+.btn-delete:hover {
+    background-color: #ce0000;
+}
+ 
 
   /* ----- main section ----- */
 
@@ -251,9 +303,6 @@ section {
  } 
 
 
-
- 
-
   .input-group button {
      padding: 10px;
      margin: 15px 0;
@@ -325,38 +374,7 @@ section {
  }
  
 
- .action-btns {
-     display: flex;
-     /* flex-direction: column; */
-     gap: 5px;
-     justify-content: start; 
-     align-items: center;
- }
- .action-btns button {
-     color: white;
-     padding: 10px;
-     border-radius: 8px;
-     border: none;
-     cursor: pointer;
-     font-size: 0.8rem;
- }
-
-        
-        
-.product-update {
-    background-color: #00af92;
-}
-.product-update:hover {
-    background-color: #00b698;
-}
-.product-delete {
-    background-color: #d60000;
-}
-.product-delete:hover {
-    background-color: #ce0000;
-}
-
-
+ 
  /* -------------- Services Section ---------- */
 
 
@@ -373,23 +391,6 @@ section {
 
 
  
- .input-group button {
-     padding: 10px;
-     margin: 15px 0;
-     border : none;
-     outline: none;
-     border-radius: 8px;
-     background-color: #00af92;
-     color: white;
-     font-size: 1rem;
-
- }
-
-
-
- .input-group button:hover {
-     background-color: #00b698;
- }
  
  .services-list {
      display: flex;
@@ -424,20 +425,7 @@ section {
 
  
  
-        
-        
-.service-update {
-    background-color: #00af92;
-}
-.service-update:hover {
-    background-color: #00b698;
-}
-.service-delete {
-    background-color: #d60000;
-}
-.service-delete:hover {
-    background-color: #e60000;
-}
+
 
 
 /* --------- Orders Section ---------- */
@@ -640,14 +628,14 @@ section {
 
  .staff-list {
      display: grid;
-     grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 2fr; 
+     grid-template-columns: 2fr 1fr 2fr 2fr 1fr 1fr; 
      gap: 10px; 
      padding: 10px;
  }
 
   .customer-list {
      display: grid;
-     grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr; 
+     grid-template-columns: 2fr 1fr 2fr 2fr; 
      gap: 10px; 
      padding: 10px;
  }
@@ -663,7 +651,6 @@ section {
     max-height: 400px;
     overflow-x: hidden;
     overflow-y: auto;
-    margin-bottom: 30px;
  }
 
  .user-list a{
@@ -813,11 +800,15 @@ section {
  }
  
 .inquiry-new {
-    color: #F59E0B;
+    color: #ffd000;
  }
 
  .inquiry-inProgress {
     color: #3B82F6;
+ }
+
+  .inquiry-failed {
+    color: #EF4444;
  }
 
  .inquiry-closed {

@@ -14,6 +14,7 @@
             <div onclick="showTabs('orders')" class="tab">Orders</div>
             <div onclick="showTabs('bookings')" class="tab">Bookings</div>
             <div onclick="showTabs('cart')" class="tab">Cart</div>
+            <div onclick="showTabs('inquiries')" class="tab">Inquiries</div>
         </div>
         <div class="content-container">
   <div id="profile" class="content active">
@@ -195,6 +196,28 @@
                       <button onclick="window.location.href='./checkout.php'" class="btn-checkout">Proceed to Checkout</button>
                  </div>
                     
+            </div>
+             <div id="inquiries" class="content">
+                 <h2>Inquiries</h2>
+                      <div class="booking-card">
+                           <div class="booking-header">
+                             <h3>Inquiry #B009</h3>
+                             <span class="status confirmed">Confirmed</span>
+                           </div>
+                           <p><strong>Date :</strong> 2025-10-12</p>
+                           <p><strong>Time :</strong> 2:00 PM</p>
+                           <p><strong>Services :</strong> Hair Coloring, Beard Trim</p>
+                         </div>
+                     
+                         <div class="booking-card">
+                           <div class="booking-header">
+                             <h3>Inquiry #B008</h3>
+                             <span class="status completed">Completed</span>
+                           </div>
+                           <p><strong>Date :</strong> 2025-09-28</p>
+                           <p><strong>Time :</strong> 10:00 AM</p>
+                           <p><strong>Services :</strong> Medium Tatoo - Chest</p>
+                         </div>
             </div>
          </div>
         </div>

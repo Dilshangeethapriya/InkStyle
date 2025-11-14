@@ -17,7 +17,7 @@ if(isset($_GET['serviceID'])){
 
         echo '<script>
                alert("Service deleted Successfully!");
-               window.history.back();
+               window.location.href = "./adminPanel.php#admin-services";
              </script>';
 
         mysqli_close($conn); 

@@ -23,7 +23,7 @@ if(isset($_GET['productID'])){
 
         echo '<script>
                alert("Product deleted Successfully!");
-               window.history.back();
+               window.location.href = "./adminPanel.php#admin-products";
              </script>';
 
         mysqli_close($conn); 

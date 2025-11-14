@@ -18,7 +18,20 @@
                     <p class="text-primary">Products</p>
                     <i class="fa-solid fa-box"></i>
                 </div>
-               <span class="text-primary font-weight-bold">6</span> 
+                <?php
+                  $productsCountQuery = "SELECT COUNT(*) AS total FROM products";
+                  $productsCountResult = mysqli_query($conn, $productsCountQuery);
+                   
+                  $productCount = 0;
+                  if($productsCountResult){
+                     $row = mysqli_fetch_assoc($productsCountResult);
+                     $productCount = $row['total'];
+                  }
+                  else{
+                    $productCount = '0';
+                  }
+                ?>
+               <span class="text-primary font-weight-bold"><?php echo htmlspecialchars($productCount); ?></span> 
             </div>
             <div class="card">
                 <div class="card-inner">
@@ -39,12 +52,25 @@
                     <p class="text-primary">Customers</p>
                     <i class="fa-solid fa-users-line"></i>
                 </div>
-               <span class="text-primary font-weight-bold">242</span> 
+                <?php
+                  $customersCountQuery = "SELECT COUNT(*) AS total FROM customer";
+                  $customersCountResult = mysqli_query($conn, $customersCountQuery);
+                   
+                  $customerCount = 0;
+                  if($customersCountResult){
+                     $row = mysqli_fetch_assoc($customersCountResult);
+                     $customerCount = $row['total'];
+                  }
+                  else{
+                    $customerCount = '0';
+                  }
+                ?>
+               <span class="text-primary font-weight-bold"><?php echo htmlspecialchars($customerCount); ?></span> 
             </div>
         </div>
         <div class="charts">
             <div class="charts-card">
-                <h2 class="chart-title">Monthly Sales</h2>
+                <h2 class="chart-title">Top Selling Products (Monthly Sales)</h2>
                 <div class="bar-chart" id="bar-chart">
                 </div>
             </div>
@@ -91,8 +117,8 @@
                         <img src="<?php echo "." . htmlspecialchars($products['image']); ?>" alt="shampoo">
                     </div>
                     <div class="action-btns">
-                        <a href="./updateProduct.php?productID=<?php echo $products['productID'] ; ?>"><button class="product-update" id="product-update"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                        <button class="product-delete" id="product-delete" onclick="deleteProduct(<?php echo $products['productID'] ; ?>)"><i class="fa-solid fa-trash"></i> Delete</button>
+                        <a href="./updateProduct.php?productID=<?php echo $products['productID'] ; ?>"><button class="product-update btn-update" id="product-update"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
+                        <button class="product-delete btn-delete" id="product-delete" onclick="deleteProduct(<?php echo $products['productID'] ; ?>)"><i class="fa-solid fa-trash"></i> Delete</button>
                    </div>
                 </div>
                  <?php
@@ -144,8 +170,8 @@
                     <p>LKR <?php echo number_format($services['estimatedPrice'],2); ?></p>
                     <p><?php echo $services['estimatedServiceTime'] ; ?> minutes</p>
                     <div class="action-btns">
-                        <a href="./updateService.php?serviceID=<?php echo $services['serviceID'] ; ?>"><button class="service-update" id="service-update"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                        <button class="service-delete" id="service-delete" onclick="deleteService(<?php echo $services['serviceID'] ; ?>)" ><i class="fa-solid fa-trash"></i> Delete</button>
+                        <a href="./updateService.php?serviceID=<?php echo $services['serviceID'] ; ?>"><button class="service-update btn-update" id="service-update"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
+                        <button class="service-delete btn-delete" id="service-delete" onclick="deleteService(<?php echo $services['serviceID'] ; ?>)" ><i class="fa-solid fa-trash"></i> Delete</button>
                     </div>
              </div>
              <?php
@@ -308,12 +334,11 @@
         <select name="filter_staff" id="filter_staff">
              <option value="">All</option>
              <option value="admin">Admin</option>
-             <option value="emplooyee">Emplooyee</option>
+             <option value="staff">Staff</option>
         </select>
     </div>
     <div class="user-list">            
         <div class="user-list-header staff-list">
-            <p>ID</p>
             <p>FULL NAME</p>
             <p>PHONE</p>
             <p>EMAIL</p>
@@ -321,36 +346,17 @@
             <p>ROLE</p>
             <p>ACTIONS</p>
         </div>
-            <div class="user-list-body">
-                
-               
-                    <div class="user-list-item staff-list">
-                        <p>1</p>
-                        <p>Dishan Geethappriya</p>
-                        <p>0772314234</p>
-                        <p>dilshan@gmail.com</p>
-                        <p>342/B, 1st cross road, Katunayake</p>
-                        <p>Admin</p>
-                        <div class="action-btns">
-                           <a href="#"><button class="service-update" id="service-update-1"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                           <a href="#"><button class="service-delete" id="service-delete-1"><i class="fa-solid fa-trash"></i> Delete</button></a>
-                        </div>
-                    </div>
-                
-                    <div class="user-list-item staff-list">
-                        <p>1</p>
-                        <p>Duminda Madusanka</p>
-                        <p>0718735275</p>
-                        <p>duminda@gmail.com</p>
-                        <p>No 12, Divulapitiya raod, Minuwangoda</p>
-                        <p>Employee</p>
-                        <div class="action-btns">
-                           <a href="#"><button class="service-update" id="service-update-1"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                           <a href="#"><button class="service-delete" id="service-delete-1"><i class="fa-solid fa-trash"></i> Delete</button></a>
-                       </div>  
-                    </div>
-               
-            </div>
+        <div class="user-list-body" id="user-list-body-staff">
+                               
+        </div>
+  </div>
+  <div class="input-group">
+            <a href="./addStaff.php">
+                 <button class="add-staff-btn">
+                + Add New Staff Member
+            </button>
+            </a>
+        </div>
 
 
      <h2 class="font-weight-bold">Customer Accounts</h2>
@@ -359,30 +365,13 @@
     </div>
     <div class="user-list">            
         <div class="user-list-header customer-list">
-            <p>ID</p>
             <p>FULL NAME</p>
             <p>PHONE</p>
             <p>EMAIL</p>
             <p>ADDRESS</p>
         </div>
-            <div class="user-list-body">
-                
-                    <div class="user-list-item customer-list">
-                        <p>1</p>
-                        <p>Thashila Maduwantha</p>
-                        <p>0743847284</p>
-                        <p>tmaduwantha@gmail.com</p>
-                        <p>32/1, Kahapitiya road, Peellawaththa </p>
-                    </div>
-
-                       <div class="user-list-item customer-list">
-                        <p>2</p>
-                        <p>Malshan Bulathsinhala</p>
-                        <p>0779824765</p>
-                        <p>malshanb@gmail.com</p>
-                        <p>NO 34, Walpola road, Andiambalama </p>
-                    </div>
-                  
+            <div class="user-list-body" id="user-list-body">
+                      
             </div>
     </div>
 </section>
@@ -507,28 +496,35 @@
             <p>ACTION</p>
         </div>
             <div class="inquiry-list-body">
-                
+                    <?php
+                         $fetchFaqQuery = "SELECT * FROM faq";
+                         $fetchFaqResult = mysqli_query($conn, $fetchFaqQuery);
+             
+                         if(mysqli_num_rows($fetchFaqResult) > 0){
+                           while($faqItem = mysqli_fetch_assoc($fetchFaqResult)){
+        
+                    ?>
                     <div class="inquiry-list-item faq-list">
-                        <p>1</p>
-                        <p>Can we make Appointments in Weekend?</p>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, esse!</p>
+                        <p><?php echo htmlspecialchars($faqItem['faqID']); ?></p>
+                        <p><?php echo htmlspecialchars($faqItem['question']); ?></p>
+                        <p><?php echo htmlspecialchars($faqItem['answer']); ?></p>
                         <div class="action-btns">
-                           <a href="#"><button class="service-update" id="service-update-1"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                           <a href="#"><button class="service-delete" id="service-delete-1"><i class="fa-solid fa-trash"></i> Delete</button></a>
+                           <a href="./updateFAQ.php?faqID=<?php echo htmlspecialchars($faqItem['faqID']); ?>"><button class="faq-update btn-update" id="faq-update-1"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
+                           <button class="faq-delete btn-delete" id="faq-delete" onclick="deleteFAQ(<?php echo htmlspecialchars($faqItem['faqID']); ?>)" ><i class="fa-solid fa-trash"></i> Delete</button>
                         </div>
                     </div>
-
-                    <div class="inquiry-list-item faq-list">
-                        <p>1</p>
-                        <p>Is cash on delivery available?</p>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, esse!</p>
-                        <div class="action-btns">
-                           <a href="#"><button class="service-update" id="service-update-1"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                           <a href="#"><button class="service-delete" id="service-delete-1"><i class="fa-solid fa-trash"></i> Delete</button></a>
-                        </div>
-                    </div>
-  
+                    <?php
+                           }
+                        }
+                    ?>
             </div>
+    </div>
+    <div class="input-group">
+        <a href="./addFAQ.php">
+        <button class="add-faq-btn">
+            + Add New FAQ
+        </button>
+        </a>
     </div>
 </section>
 
@@ -543,5 +539,7 @@
  <script src="../resources/js/admin/sidebar.js"></script>
  <script src="../resources/js/admin/productsSection.js"></script>
  <script src="../resources/js/admin/servicesSection.js"></script>
+ <script src="../resources/js/admin/usersSection.js"></script>
+  <script src="../resources/js/admin/inquirySection.js"></script>
 </body>
 </html>

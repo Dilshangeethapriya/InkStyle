@@ -66,7 +66,7 @@
 
         <main class="main-container">
             <div class="form-card">
-                <form action="#" method="POST" class="product-form" enctype="multipart/form-data">
+                <form action="addProduct.php" method="POST" class="product-form" enctype="multipart/form-data">
                     
                     <div class="form-group">
                         <label for="productName">Product Name</label>
