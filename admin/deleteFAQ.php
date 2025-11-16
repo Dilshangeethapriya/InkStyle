@@ -48,7 +48,7 @@ if(isset($_GET['faqID'])){
 }
 else{
    echo '<script>
-            alert("NO FAQ ID was provided!");
+            alert("No FAQ ID was provided!");
             window.history.back();
          </script>';
 

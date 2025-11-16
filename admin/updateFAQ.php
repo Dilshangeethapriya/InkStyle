@@ -70,8 +70,8 @@
                     </div>
         
                     <div class="form-actions">
-                        <button type="submit" class="submit-btn" id="update_faq_btn" name="update_faq_btn"><i class="fa-solid fa-plus-circle"></i> Update FAQ</button>
-                        <a href="./adminPanel.php#admin-inquiries"><button type="button" class="cancel-btn"><i class="fa-solid fa-xmark-circle"></i> Cancel</button></a>
+                        <button type="submit" class="submit-btn" id="update_faq_btn" name="update_faq_btn"><i class="fa-solid fa-pen-to-square"></i> Update FAQ</button>
+                        <a href="adminPanel.php#admin-inquiries" class="cancel-btn"><i class="fa-solid fa-xmark-circle"></i> Cancel</a>
                     </div>
                 </form>
             </div>

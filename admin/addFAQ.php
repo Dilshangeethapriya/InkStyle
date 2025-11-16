@@ -47,7 +47,7 @@
         
                     <div class="form-actions">
                         <button type="submit" class="submit-btn" id="add_faq_btn" name="add_faq_btn"><i class="fa-solid fa-plus-circle"></i> Add FAQ</button>
-                        <a href="./adminPanel.php#admin-inquiries"><button type="button" class="cancel-btn"><i class="fa-solid fa-xmark-circle"></i> Cancel</button></a>
+                        <a href="adminPanel.php#admin-inquiries" class="cancel-btn"><i class="fa-solid fa-xmark-circle"></i> Cancel</a>
                     </div>
                 </form>
             </div>

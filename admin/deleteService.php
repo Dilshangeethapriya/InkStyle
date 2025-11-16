@@ -48,7 +48,7 @@ if(isset($_GET['serviceID'])){
 }
 else{
    echo '<script>
-            alert("NO service ID was provided!");
+            alert("No service ID was provided!");
             window.history.back();
          </script>';
 

@@ -1,4 +1,11 @@
+function deleteStaff(staffID) {
+  if (confirm("Are you sure, you want to remove this staff member?")) {
+    window.location.href = "./deleteStaff.php?staffID=" + staffID;
+  }
+}
+
 window.addEventListener("DOMContentLoaded", function () {
+  // customers data list
   const searchCustomerInput = document.getElementById("search_customer");
   const userListBody = document.getElementById("user-list-body");
 
@@ -35,7 +42,7 @@ window.addEventListener("DOMContentLoaded", function () {
     xhr.send("searchValue=" + encodeURIComponent(searchValue));
   }
 
-  // staff data fetcher
+  // staff data list
 
   const searchStaffInput = document.getElementById("search_staff");
   const filterStaffInput = document.getElementById("filter_staff");

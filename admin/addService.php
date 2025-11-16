@@ -96,7 +96,7 @@
                     
                     <div class="form-actions">
                         <button type="submit" class="submit-btn" id="add_service_btn" name="add_service_btn"><i class="fa-solid fa-plus-circle"></i> Add Service</button>
-                        <a href="adminPanel.php#admin-services"><button type="button" class="cancel-btn"><i class="fa-solid fa-xmark-circle"></i> Cancel</button></a>
+                        <a href="adminPanel.php#admin-services" class="cancel-btn"><i class="fa-solid fa-xmark-circle"></i> Cancel</a>
                     </div>
                 </form>
             </div>

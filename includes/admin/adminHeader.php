@@ -6,7 +6,8 @@
     <title><?php echo isset($title) ? $title : "InkStyle by Dinu" ?></title>
     <link rel="icon" type="image/x-icon" href="../resources/images/inkstyle_favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <link rel="stylesheet" href="../resources/css/admin/formStyiling.css">
+    <link rel="stylesheet" href="../resources/css/admin/formStyling.css">
+    <link rel="stylesheet" href="../resources/css/admin/viewStyling.css">
     <link rel="stylesheet" href="../resources/css/admin/adminPanel.css">
     <?php if(isset($cssFile)){ ?>
         <link rel="stylesheet" href="../resources/css/<?php echo $cssFile; ?>">

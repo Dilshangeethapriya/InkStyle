@@ -112,7 +112,7 @@
                 <h2>Send Us a Message</h2>
                 <form id="contactForm" action="contact.php" method="POST">
                   <input type="hidden" name="customerID" id="customerID" value="<?php echo htmlspecialchars($userData['id'] ?? ''); ?>" >
-                  <input type="hidden" name="status" id="status" value="new" >
+                  <input type="hidden" name="status" id="status" value="New" >
                   <div class="input-group">
                     <input type="text" id="name" name="name" autocomplete="name" placeholder="Your Name" <?php echo !empty($userData['fullName'])? ' value="'.htmlspecialchars($userData['fullName']).'"' : '' ?> required>
                   </div>

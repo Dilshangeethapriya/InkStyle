@@ -117,7 +117,7 @@
                     
                     <div class="form-actions">
                         <button type="submit" class="submit-btn" id="update_service_btn" name="update_service_btn"><i class="fa-solid fa-pen-to-square"></i> Update Service</button>
-                        <a href="adminPanel.php#admin-services"><button type="button" class="cancel-btn"><i class="fa-solid fa-xmark-circle"></i> Cancel</button></a>
+                        <a href="adminPanel.php#admin-services" class="cancel-btn"><i class="fa-solid fa-xmark-circle"></i> Cancel</a>
                     </div>
                 </form>
             </div>

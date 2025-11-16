@@ -1,6 +1,11 @@
   <?php
     session_start();
-    
+
+    if(!isset($_SESSION['userID'])){
+      header("Location: login.php");
+      exit();
+    }
+ 
     $title = "User Account | InkStyle by Dinu";
     $cssFile = "user.css";
   
@@ -21,30 +26,24 @@
                  <h2>Profile</h2>
                  <div class="profile-card">
                            <?php
-                              if(isset($_SESSION['userID'])){
-                                   $userID = $_SESSION['userID'];
-                                   $userProfileQuery = "SELECT * FROM customer WHERE id = '$userID'";
+                               $userID = mysqli_real_escape_string($conn, $_SESSION['userID']);
+                               $userProfileQuery = "SELECT * FROM customer WHERE id = '$userID'";
 
-                                   $userProfileResults = mysqli_query($conn, $userProfileQuery);
+                               $userProfileResults = mysqli_query($conn, $userProfileQuery);
 
-                                   if(mysqli_num_rows($userProfileResults) === 1){
-                                        $row = mysqli_fetch_assoc($userProfileResults);
-                         
-                                
+                               if(mysqli_num_rows($userProfileResults) === 1){
+                                    $row = mysqli_fetch_assoc($userProfileResults);
                            ?>
-                           <p><strong>Name:</strong> <?php echo htmlspecialchars($row['fullName']); ?></p>
-                           <p><strong>Email:</strong> <?php echo htmlspecialchars($row['email']); ?></p>
-                           <p><strong>Phone:</strong> <?php echo htmlspecialchars($row['phone']); ?></p>
-                           <p><strong>Address:</strong> <?php echo htmlspecialchars($row['address']); ?></p>
-                           <button onclick="window.location.href='./editProfile.php'" class="btn-edit">Edit Profile</button>
-                           <button onclick="window.location.href='./logout.php'" class="btn-logout">Logout</button>
 
+                               <p><strong>Name:</strong> <?php echo htmlspecialchars($row['fullName']); ?></p>
+                               <p><strong>Email:</strong> <?php echo htmlspecialchars($row['email']); ?></p>
+                               <p><strong>Phone:</strong> <?php echo htmlspecialchars($row['phone']); ?></p>
+                               <p><strong>Address:</strong> <?php echo htmlspecialchars($row['address']); ?></p>
+                               <button onclick="window.location.href='./editProfile.php'" class="btn-edit">Edit Profile</button>
+                               <button onclick="window.location.href='./logout.php'" class="btn-logout">Logout</button>
+            
                            <?php 
-                                }
-                              }else{
-                                   header("Location: login.php");
-                                   exit();
-                              }
+                              }      
                            ?>
                  </div>
             </div>
@@ -199,25 +198,54 @@
             </div>
              <div id="inquiries" class="content">
                  <h2>Inquiries</h2>
-                      <div class="booking-card">
-                           <div class="booking-header">
-                             <h3>Inquiry #B009</h3>
-                             <span class="status confirmed">Confirmed</span>
+                 <?php
+                      $fetchInquiryQuery = "SELECT * FROM inquiry WHERE customerID = '$userID'";
+                      $fetchInquiryResult = mysqli_query($conn, $fetchInquiryQuery);
+                      if(mysqli_num_rows($fetchInquiryResult) > 0){
+                         while ($inquiryData = mysqli_fetch_assoc($fetchInquiryResult)){
+                         $inquiryID = htmlspecialchars($inquiryData['inquiryID']);
+                  ?>
+                      <div class="inquiry-card">
+                           <div class="inquiry-header">
+                             <h3>Inquiry No: <?php echo $inquiryID ?></h3>
+                             <span class="status inquiry-<?php echo htmlspecialchars($inquiryData['status']) ?>"><?php echo htmlspecialchars($inquiryData['status']) ?></span>
                            </div>
-                           <p><strong>Date :</strong> 2025-10-12</p>
-                           <p><strong>Time :</strong> 2:00 PM</p>
-                           <p><strong>Services :</strong> Hair Coloring, Beard Trim</p>
-                         </div>
-                     
-                         <div class="booking-card">
-                           <div class="booking-header">
-                             <h3>Inquiry #B008</h3>
-                             <span class="status completed">Completed</span>
+                           <p><strong>Date & Time : </strong><?php echo htmlspecialchars(date("d M Y, g:i A",strtotime($inquiryData['created_at']))) ?></p>
+                           <p><strong>Name : </strong> <?php echo htmlspecialchars($inquiryData['name']) ?></p>
+                           <p><strong>Email : </strong><?php echo htmlspecialchars($inquiryData['email']) ?></p>
+                           <p><strong>Phone : </strong><?php echo htmlspecialchars($inquiryData['phone']) ?></p>
+                           <div class="message-container">
+                              <p><strong>Message</strong></p>
+                              <p><?php echo htmlspecialchars($inquiryData['message']) ?></p>
                            </div>
-                           <p><strong>Date :</strong> 2025-09-28</p>
-                           <p><strong>Time :</strong> 10:00 AM</p>
-                           <p><strong>Services :</strong> Medium Tatoo - Chest</p>
-                         </div>
+                           <hr>
+                           <h4 class="inquiry-subheader">Replies</h4>
+                           <div class="reply-list">
+                            <?php 
+                                 $inquiryReplyQuery = "SELECT * FROM inquiry_replies WHERE inquiryID = '$inquiryID'";
+                                 $inquiryReplyQueryResult = mysqli_query($conn, $inquiryReplyQuery);
+           
+                                 if(mysqli_num_rows($inquiryReplyQueryResult) > 0){
+                                   while($inquiryReplies = mysqli_fetch_assoc($inquiryReplyQueryResult)){
+                             ?>
+                               <div class="reply-container">
+                                  <p><strong>Recieved on: </strong><?php echo htmlspecialchars(date("d M Y, g:i A",strtotime($inquiryReplies['created_at']))) ?> </p>
+                                  <p><?php echo htmlspecialchars($inquiryReplies['reply']) ?></p>
+                              </div>
+                              <?php
+                                   }
+                              }
+                              else{
+                                   echo ' <p>No replies yet.</p>';
+                              }
+                              ?>
+                           </div>
+
+                     </div>
+                   <?php
+                           }
+                      }
+                   ?>
             </div>
          </div>
         </div>

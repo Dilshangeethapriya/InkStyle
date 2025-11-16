@@ -146,7 +146,7 @@
                     
                     <div class="form-actions">
                         <button type="submit" class="submit-btn" id="update_product_btn" name="update_product_btn"><i class="fa-solid fa-pen-to-square"></i> Update Product</button>
-                        <a href="adminPanel.php#admin-products"><button type="button" class="cancel-btn"><i class="fa-solid fa-xmark-circle"></i> Cancel</button></a>
+                        <a href="adminPanel.php#admin-products" class="cancel-btn"><i class="fa-solid fa-xmark-circle"></i> Cancel</a>
                     </div>
                 </form>
             

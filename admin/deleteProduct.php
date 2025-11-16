@@ -54,7 +54,7 @@ if(isset($_GET['productID'])){
 }
 else{
    echo '<script>
-            alert("NO product ID was provided!");
+            alert("No product ID was provided!");
             window.history.back();
          </script>';
 

@@ -24,12 +24,12 @@ if(isset($_POST['register_btn'])){
   $address = mysqli_real_escape_string($conn, $_POST['address']);
   $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-  $checkExistingEmailQuery = "SELECT email from customer WHERE email='$email'";
+  $checkExistingEmailQuery = "SELECT * from customer WHERE email='$email' OR fullName = '$name'";
   $checkExistingEmailResult = mysqli_query($conn, $checkExistingEmailQuery);
 
   if(mysqli_num_rows($checkExistingEmailResult) > 0){
     echo '<script>
-            alert("Email you entered is already registered! Enter a different email");
+            alert("Email or Name you entered is already registered! Enter a different one.");
             window.history.back();
             </script>';
 
@@ -110,6 +110,7 @@ mysqli_close($conn);
       
     </div>
   </section>
+
 </body>
 </html>
 

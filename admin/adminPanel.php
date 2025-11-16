@@ -354,7 +354,7 @@
             <a href="./addStaff.php">
                  <button class="add-staff-btn">
                 + Add New Staff Member
-            </button>
+                </button>
             </a>
         </div>
 
@@ -445,43 +445,29 @@
         <label for="filter_inquiry_status" class="filter-inquiry-status">Filter By Status: </label>
         <select name="filter_inquiry_status" id="filter_inquiry_status">
              <option value="">All</option>
-             <option value="new">New</option>
-             <option value="inProgress">In Progress</option>
-             <option value="closed">Closed</option>
+             <option value="New">New</option>
+             <option value="Open">Open</option>
+             <option value="Failed">Failed</option>
+             <option value="Closed">Closed</option>
+        </select>
+        <label for="sort_inquiry_date" class="sort-inquiry">Sort By Date: </label>
+        <select name="sort_inquiry_date" id="sort_inquiry_date">
+             <option value="date_desc">Date (Newest to Oldest)</option>
+             <option value="date_asc">Date (Oldest to Newest)</option>
         </select>
     </div>
     <div class="inquiry-list">            
         <div class="inquiry-list-header customer-question-list">
             <p>ID</p>
-            <p>FULL NAME</p>
+            <p>NAME</p>
             <p>PHONE</p>
-            <p>EMAIL</p>
+            <p>DATE/TIME</p>
             <p>MESSAGE</p>
             <p>STATUS</p>
         </div>
-            <div class="inquiry-list-body">
+            <div class="inquiry-list-body" id="inquiry-list-body">
                 
-                    <a href="view_inquiry.php?id=1">
-                        <div class="inquiry-list-item customer-question-list">
-                            <p>1</p>
-                            <p>Kasun Perera</p>
-                            <p>0772314234</p>
-                            <p>kasunperera@gmail.com</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, quisquam?</p>
-                            <p class="inquiry-new">New</p>
-                        </div>
-                    </a>
-
-                    <a href="view_inquiry.php?id=1">
-                        <div class="inquiry-list-item customer-question-list">
-                            <p>2</p>
-                            <p>Ishani Silva</p>
-                            <p>0742314484</p>
-                            <p>ishanis@gmail.com</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, quisquam?</p>
-                            <p class="inquiry-inProgress">In Progress</p>
-                        </div>
-                    </a>
+                   
                        
             </div>
 

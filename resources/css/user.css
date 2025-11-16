@@ -181,7 +181,7 @@ body {
 }
 
 .status.confirmed {
-     background: rgb(0, 167, 167);
+    background: rgb(0, 167, 167);
 }
 
 .status.pending {
@@ -356,3 +356,79 @@ ul {
   letter-spacing: 2px;
 }
 
+
+/* -------- inquiry section ------ */
+
+
+.inquiry-card{
+   padding: 10px;
+   border-radius: 8px;
+   border: 1px solid rgb(0, 216, 216);
+   margin-bottom: 20px;
+}
+
+.inquiry-card .inquiry-header{
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 20px;
+   font-size: 1.3rem ;
+}
+
+.inquiry-card p{
+  margin-bottom: 10px;
+}
+.inquiry-card p > strong{
+  color:rgb(0, 216, 216) ;
+}
+
+
+.inquiry-card .message-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.inquiry-card .message-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.inquiry-card hr{
+  border-color: rgb(0, 216, 216);
+  margin-bottom: 20px;
+}
+
+.inquiry-card .inquiry-subheader{
+  color: #e4b500;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.inquiry-card .reply-container{
+   border-radius: 8px;
+   border: 0.25px solid #02241e;
+   padding: 10px;
+   border-left: 5px solid rgb(0, 216, 216);
+   margin-bottom: 10px;
+}
+
+
+
+
+.inquiry-New {
+    background-color: #ffd000 !important;
+ }
+
+ .inquiry-Open {
+    background-color: #3B82F6 !important;
+ }
+
+  .inquiry-Failed {
+    background-color: #EF4444 !important;
+ }
+
+ .inquiry-Closed {
+    background-color: #10B981 !important;
+ }

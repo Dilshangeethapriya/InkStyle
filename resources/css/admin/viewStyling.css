@@ -1,0 +1,141 @@
+
+.view-card {
+    box-shadow: 0 2px 10px -3px #02241e;
+    border-top: 5px solid #dda900ff;
+    background-color: white;
+    border-radius: 8px;
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 40px;
+    padding-top: 60px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.view-card form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.view-card .close-btn{
+    text-decoration: none;
+    color: red;
+    font-size: 1.6rem;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+.view-group{
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #dfdfdf;
+}
+
+.view-group p{
+    font-size: 1.1rem;
+    color: #303030;
+}
+
+.view-bold-text{
+    font-weight: 700;
+    color: black;
+}
+
+.text-field-group{
+    flex-direction: column;
+}
+
+.group-heading{
+    margin-top: 30px;
+}
+
+.view-group-cluster{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.reply-box{
+    background-color: white;
+    box-shadow: 0 2px 5px -3px #02241e;
+    border-left: 5px solid #00af92;;
+}
+
+.view-card .submit-btn{
+   background-color: #dda900ff;;
+}
+
+
+.order-pending {
+    color: #F59E0B !important;
+ }
+
+ .order-confirmed {
+    color: #3B82F6 !important;
+ }
+
+ .order-proccessing {
+    color: #8B5CF6 !important;
+ }
+
+ .order-shipped {
+    color: #06B6D4 !important;
+ }
+
+ .order-delivered {
+    color: #10B981 !important;
+ }
+
+ .order-failedDelivery {
+    color: #F97316 !important;
+ }
+
+ .order-cancelled {
+    color: #EF4444 !important;
+ }
+
+
+.booking-pending {
+    color: #F59E0B !important;
+ }
+
+ .booking-confirmed {
+    color: #3B82F6 !important;
+ }
+
+ .booking-completed {
+    color: #10B981 !important;
+ }
+
+ .booking-delayed {
+    color: #8B5CF6 !important;
+ }
+
+  .booking-cancelled {
+    color: #EF4444 !important;
+ }
+
+.inquiry-New {
+    color: #ffd000 !important;
+ }
+
+ .inquiry-Open {
+    color: #3B82F6 !important;
+ }
+
+  .inquiry-Failed {
+    color: #EF4444 !important;
+ }
+
+ .inquiry-Closed {
+    color: #10B981 !important;
+ }
+

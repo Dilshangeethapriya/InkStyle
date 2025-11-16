@@ -35,8 +35,8 @@ if(mysqli_num_rows($fetchStaffDataResult) > 0){
           <p>'.htmlspecialchars($staffData['address']).'</p>
           <p>'.htmlspecialchars($staffData['role']).'</p>
           <div class="action-btns">
-                           <a href="updateUser.php?staffID='.htmlspecialchars($staffData['staffID']).'"><button class="staff-update btn-update" id="staff-update"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                           <button class="staff-delete btn-delete" id="staff-delete"><i class="fa-solid fa-trash"></i> Delete</button>
+                           <a href="updateStaff.php?staffID='.base64_encode($staffData['staffID']).'"><button class="staff-update btn-update" id="staff-update"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
+                           <button class="staff-delete btn-delete" id="staff-delete" onclick="deleteStaff(\''.base64_encode($staffData['staffID']).'\')"><i class="fa-solid fa-trash" ></i> Delete</button>
          </div>  
         </div>
          ';

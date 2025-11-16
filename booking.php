@@ -1,9 +1,20 @@
 
   <?php
     session_start();
+    
+      if(!isset($_SESSION['userID'])){
+      header("Location: login.php");
+      exit();
+    }
+
+
+    
     $title = "Book an Appointment | InkStyle by Dinu";
     $cssFile = "booking.css";
     include "./includes/header.php";
+
+  
+
    ?>
       <section class="booking-section">
              <div class="booking-container">
