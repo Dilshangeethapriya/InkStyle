@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Alan Sans", sans-serif;
+}
+
+body{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(204, 228, 228);
+}
+
+.staff-login-card{
+  width: 100%;
+  width: 450px;
+  background: #02241e;
+  padding: 40px 50px;
+  border-radius: 10px;
+  box-shadow: 0 2px 20px -3px #02241e;
+  border: 1px solid #004639;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+ .logo-img{
+    width: 250px;
+    margin: auto;
+}
+
+.staff-login-card h1{
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #dda900;
+}
+
+
+.form-group{
+  margin-bottom: 20px;
+}
+
+.form-group label{
+  color: rgb(0, 216, 216);
+}
+
+.form-group input{
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #004639;
+  border: 1px solid #02241e;
+  color: #FFFFFF;
+  outline: none;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+.form-group input:focus{
+  border-color: rgb(0, 216, 216);
+}
+
+.staff-login-btn{
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background:#dda900;;
+  color: #FFFFFF;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 1.1rem;
+}
+
+.staff-login-btn:hover{
+  background: #ffc404;
+}
+
+.back-home{
+  display: block;
+  text-align: center;
+  margin-top: 14px;
+  font-size: 0.9rem;
+  color: rgb(0, 216, 216);
+  text-decoration: none;
+}
+
+.back-home:hover{
+  text-decoration: underline;
+}

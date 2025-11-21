@@ -68,6 +68,36 @@ body{
     border-radius: 8px;
 }
 
+.add-service{
+    display: flex;
+    gap: 5px;
+    width: 100%;
+}
+
+
+
+.add-btn{
+    width: 150px;
+    background-color: #e4b500;
+    color: white;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s; 
+}
+
+#serviceList{
+   list-style:decimal;
+   width: 100%;
+}
+
+#serviceList li{
+   margin-bottom: 10px;
+}
+
 .extra-info{
     width: 100%;
     background-color: rgb(214, 255, 255);
@@ -86,9 +116,12 @@ body{
     transition: 0.3s;
 }
 
+
 .submit-btn:hover {
     background-color: #ffcc00;
 }
+
+
 
 
 @media screen and (max-width: 768px) {

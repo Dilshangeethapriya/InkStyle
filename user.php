@@ -15,11 +15,11 @@
 <section class="user-section">
     <div class="tabs-container">
         <div class="tabs">
-            <div onclick="showTabs('profile')" class="tab active">Profile</div>
-            <div onclick="showTabs('orders')" class="tab">Orders</div>
-            <div onclick="showTabs('bookings')" class="tab">Bookings</div>
-            <div onclick="showTabs('cart')" class="tab">Cart</div>
-            <div onclick="showTabs('inquiries')" class="tab">Inquiries</div>
+            <div onclick="showTabs('profile')" class="tab active"> <i class="fa-solid fa-circle-user"></i> <span class="tab-text">Profile</span> </div>
+            <div onclick="showTabs('orders')" class="tab"> <i class="fa-solid fa-boxes-packing"></i> <span class="tab-text">Orders</span> </div>
+            <div onclick="showTabs('bookings')" class="tab"> <i class="fa-solid fa-calendar-check"></i> <span class="tab-text">Bookings</span> </div>
+            <div onclick="showTabs('cart')" class="tab"> <i class="fa-solid fa-cart-shopping"></i> <span class="tab-text">Cart</span> </div>
+            <div onclick="showTabs('inquiries')" class="tab"> <i class="fa-solid fa-clipboard-question"></i> <span class="tab-text">Inquiries</span></div>
         </div>
         <div class="content-container">
   <div id="profile" class="content active">
@@ -46,7 +46,7 @@
                               }      
                            ?>
                  </div>
-            </div>
+ </div>
             <div id="orders" class="content">
                  <h2>Orders</h2>
                   <div class="order-card">
@@ -128,25 +128,61 @@
             </div>
             <div id="bookings" class="content">
                  <h2>Bookings</h2>
+                    <?php
+                        $userID = mysqli_real_escape_string($conn, $_SESSION['userID']);
+                        $fetchBookingsQuery = "SELECT * FROM bookings WHERE userID = '$userID' ORDER BY created_at DESC";
+                        $fetchBookingsResult = mysqli_query($conn, $fetchBookingsQuery);
+
+                        if(mysqli_num_rows($fetchBookingsResult) > 0){
+                         while($bookings = mysqli_fetch_assoc($fetchBookingsResult)){
+                         $totalMinutes = intval($bookings['totalDuration']);
+                         $hours = intdiv($totalMinutes, 60);
+                         $minuts = $totalMinutes%60;
+                         $totalDuration =  "{$hours}h {$minuts}m";
+                         $bookingID = $bookings['bookingID'];
+                         $serviceList = [];
+
+                         $bookedServicesQuery = "SELECT serviceID FROM booking_services WHERE bookingID = '$bookingID'";
+                         $bookedServicesResult =  mysqli_query($conn, $bookedServicesQuery);
+
+                         if(mysqli_num_rows($bookedServicesResult) > 0){
+                         while($bookedService = mysqli_fetch_assoc($bookedServicesResult)){
+                              $serviceID = $bookedService['serviceID'];
+
+                              $serviceDataQuery = "SELECT serviceName FROM services WHERE serviceID = '$serviceID'";
+                              $serviceDataResult =  mysqli_query($conn,$serviceDataQuery);
+
+                              if(mysqli_num_rows($serviceDataResult) > 0){
+                              while($serviceData = mysqli_fetch_assoc($serviceDataResult)){
+                                   $serviceList[] = $serviceData['serviceName']; 
+                              }
+                             }
+
+
+                         }
+                         }
+
+                    ?>
                       <div class="booking-card">
                            <div class="booking-header">
-                             <h3>Booking #B009</h3>
-                             <span class="status confirmed">Confirmed</span>
+                             <h3>Booking ID : <?php echo htmlspecialchars($bookings['bookingID']); ?></h3>
+                             <span class="status booking-<?php echo htmlspecialchars($bookings['status']); ?>"><?php echo htmlspecialchars(ucfirst($bookings['status'])); ?></span>
                            </div>
-                           <p><strong>Date :</strong> 2025-10-12</p>
-                           <p><strong>Time :</strong> 2:00 PM</p>
-                           <p><strong>Services :</strong> Hair Coloring, Beard Trim</p>
-                         </div>
-                     
-                         <div class="booking-card">
-                           <div class="booking-header">
-                             <h3>Booking #B008</h3>
-                             <span class="status completed">Completed</span>
+                           <p><strong>Booking Date: </strong> <?php echo htmlspecialchars(date("l, jS F Y", strtotime($bookings['booking_date']))); ?></p>
+                           <p><strong>Time Slot:</strong>  <?php echo htmlspecialchars(date("g:i A", strtotime($bookings['booking_start_time']))); ?> - <?php echo htmlspecialchars(date("g:i A", strtotime($bookings['booking_end_time']))); ?></p>
+                           <p><strong>Total Duration :</strong> <?php echo htmlspecialchars($totalDuration); ?></p>
+                           <div class="services-list">
+                              <p class="services-list-child" ><strong>Services :</strong></p>
+                              <p class="services-list-child"> <?php foreach($serviceList as $service){echo '<span> &bull; '.htmlspecialchars($service).'</span><br>' ;}  ?> </p>
                            </div>
-                           <p><strong>Date :</strong> 2025-09-28</p>
-                           <p><strong>Time :</strong> 10:00 AM</p>
-                           <p><strong>Services :</strong> Medium Tatoo - Chest</p>
-                         </div>
+                           <p><strong>Notes : </strong> <?php echo htmlspecialchars($bookings['notes']); ?></p>
+                           <button class="btn-cancel" id="booking-cancel" name="booking-cancel" onclick="cancelBooking(<?php echo htmlspecialchars($bookings['bookingID']) ; ?>)" <?php if($bookings['status'] === 'completed' || $bookings['status'] === 'cancelled' || $bookings['status'] === 'confirmed'){echo "disabled";} ?>><i class="fa-solid fa-xmark"></i> Cancel Booking</button>
+                           <span class="created-date">Submited on <?php echo htmlspecialchars(date("l, jS F Y \a\\t g:i A", strtotime($bookings['created_at']))); ?></span>
+                      </div>
+                     <?php
+                         }
+                        }
+                     ?>          
             </div>
             <div id="cart" class="content">
                  <h2>Cart</h2>
@@ -161,7 +197,7 @@
                     <div class="item-card">
                         
                         <div class="item-header">
-                            <img src="./resources/images/Store/shampoo.jpg" alt="item">
+                            <img src="./resources/images/Store/1762509329_shampoo.jpg" alt="item">
                             <p class="item-name">Hair Shampoo</p>
                         </div>
                         <p class="price">800.00 LKR</p>
@@ -192,7 +228,11 @@
                        </div> 
                     </div>
                       <p><strong>Grand total :</strong> 2,000.00 LKR</p>
-                      <button onclick="window.location.href='./checkout.php'" class="btn-checkout">Proceed to Checkout</button>
+                      <div class="action-btn">
+                       <button onclick="window.location.href='./store.php'" class="btn-add"> <i class="fa-solid fa-cart-plus"></i> Add More Items</button>
+                       <button onclick="window.location.href='./checkout.php'" class="btn-checkout"> <i class="fa-solid fa-circle-check"></i> Proceed to Checkout</button>
+                      </div>
+                      
                  </div>
                     
             </div>
@@ -207,7 +247,7 @@
                   ?>
                       <div class="inquiry-card">
                            <div class="inquiry-header">
-                             <h3>Inquiry No: <?php echo $inquiryID ?></h3>
+                             <h3>Inquiry ID: <?php echo $inquiryID ?></h3>
                              <span class="status inquiry-<?php echo htmlspecialchars($inquiryData['status']) ?>"><?php echo htmlspecialchars($inquiryData['status']) ?></span>
                            </div>
                            <p><strong>Date & Time : </strong><?php echo htmlspecialchars(date("d M Y, g:i A",strtotime($inquiryData['created_at']))) ?></p>

@@ -20,6 +20,18 @@
     gap: 20px;
 }
 
+.view-card h2{
+   margin-bottom: 20px;
+   text-align: center;
+}
+
+
+.view-card h3{
+   margin: 50px 15px 0 0;
+   font-size: 1.3rem;
+   text-align: center;
+}
+
 .view-card .close-btn{
     text-decoration: none;
     color: red;
@@ -27,6 +39,21 @@
     position: absolute;
     top: 8px;
     left: 8px;
+}
+
+.view-card .logout-btn{
+    text-decoration: none;
+    color: unset;
+    background-color: #F57C00;
+    color: #FFFFFF;
+    font-size: 1.1rem;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    width: 150px;
+    text-align: center;
+    margin: auto;
+    margin-top: 30px;
 }
 
 .view-group{
@@ -70,9 +97,17 @@
 }
 
 .view-card .submit-btn{
-   background-color: #dda900ff;;
+   background-color: #dda900;
 }
 
+.view-card .submit-btn:hover{
+   background-color: #ffc400;
+}
+
+.view-card .submit-btn:disabled{
+   background-color: #aa9758;
+   cursor: not-allowed;
+}
 
 .order-pending {
     color: #F59E0B !important;
@@ -103,6 +138,7 @@
  }
 
 
+
 .booking-pending {
     color: #F59E0B !important;
  }
@@ -123,6 +159,8 @@
     color: #EF4444 !important;
  }
 
+
+ 
 .inquiry-New {
     color: #ffd000 !important;
  }

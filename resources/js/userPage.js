@@ -21,3 +21,13 @@ window.addEventListener("load", () => {
     showTabs(hash);
   }
 });
+
+function cancelBooking(bookingID) {
+  if (
+    confirm(
+      "WARNING: This booking cancellation is permanent and irreversible. Are you sure you want to cancel this booking?"
+    )
+  ) {
+    window.location.href = "./cancelBooking.php?bookingID=" + bookingID;
+  }
+}

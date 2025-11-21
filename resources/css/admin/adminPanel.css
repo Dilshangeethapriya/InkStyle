@@ -47,10 +47,15 @@ body{
     font-size: 1.5rem;
 }
 
-
 .menu-icon{
     display: none;
     font-size: 1.5rem;
+}
+
+.header-icons{
+    text-decoration: none;
+    color: unset;
+    cursor: pointer;
 }
 
   /* ------ sidebar ------- */
@@ -130,12 +135,12 @@ body{
      border : 1px solid #cfcfcf;
      border-radius: 8px;
      font-size: 1rem;
-     min-width: 300px;
+     min-width: 200px;
  }
 
 
  .search-group label {
-     font-size: 1.1rem;
+     font-size: 1rem;
  }
 
  .input-group button {
@@ -186,7 +191,7 @@ body{
     background-color: #d60000;
 }
 .btn-delete:hover {
-    background-color: #ce0000;
+    background-color: #eb0000;
 }
  
 
@@ -340,6 +345,13 @@ section {
      font-size: 0.85rem;
  }
 
+ .products-list-body{
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+ }
+
+
  .products-list .products-list-item {
     background-color: white;
     border-bottom: 1px solid #eee;
@@ -411,6 +423,12 @@ section {
      color: white;
      font-weight: 600;
      font-size: 0.85rem;
+ }
+
+ .services-list-body{
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
  }
 
  .services-list .services-list-item {
@@ -530,8 +548,6 @@ section {
 
 
 
-
-
  
  .booking-list {
      display: flex;
@@ -542,7 +558,7 @@ section {
  .booking-list-header,
  .booking-list-item {
      display: grid;
-     grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr; 
+     grid-template-columns: 0.75fr 2fr 2fr 1fr 1fr 1fr 0.75fr; 
      gap: 10px; 
      padding: 10px;
  }

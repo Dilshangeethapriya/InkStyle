@@ -100,13 +100,14 @@
                 <p>IMAGE</p>
                 <p>ACTIONS</p>
             </div>
-            <?php
-                $fetchProductsQuery = "SELECT * FROM products";
-                $fetchProductsResult = mysqli_query($conn, $fetchProductsQuery);
-
-                if(mysqli_num_rows($fetchProductsResult) > 0){
-                   while($products = mysqli_fetch_assoc($fetchProductsResult)){
-            ?>
+            <div class="products-list-body">
+                   <?php
+                      $fetchProductsQuery = "SELECT * FROM products";
+                      $fetchProductsResult = mysqli_query($conn, $fetchProductsQuery);
+      
+                      if(mysqli_num_rows($fetchProductsResult) > 0){
+                         while($products = mysqli_fetch_assoc($fetchProductsResult)){
+                   ?>
                 <div class="products-list-item">
                     <p><?php echo $products['productID'] ; ?></p>
                     <p><?php echo htmlspecialchars($products['productName']); ?></p>
@@ -130,6 +131,8 @@
                        echo '<div class="status-message"><p>No products found in the database.</p></div>';
                    }
                  ?>
+
+            </div>
         </div>
          <div class="input-group">
             <a href="./addProduct.php">
@@ -155,7 +158,8 @@
                 <p>SERVICE TIME</p>
                 <p>ACTIONS</p>
             </div>
-             <?php
+            <div class="services-list-body">
+                <?php
                 $fetchServicesQuery = "SELECT * FROM services";
                 $fetchServicesResult = mysqli_query($conn, $fetchServicesQuery);
 
@@ -183,6 +187,7 @@
                        echo '<div class="status-message"><p>No services found in the database.</p></div>';
                    }
                  ?>
+            </div>   
         </div>
             
          <div class="input-group">
@@ -268,9 +273,29 @@
         <h1 class="font-weight-bold">Bookings</h1>
     </div>
      <div class="search-group">
-        <input type="text"  name="search_booking" id="search_booking" placeholder="Search Customer's Name">
-        <label for="sort_booking" class="sort-booking">Sort By : </label>
-        <select name="sort_booking" id="sort_booking">
+        <input type="text"  name="search_booking_name" id="search_booking_name" placeholder="Search Customer's Name">
+
+        <label for="filter_booking_date" class="filter-date">Filter By Date : </label>
+        <select name="filter_booking_date" id="filter_booking_date">
+             <option value="">All</option>
+             <option value="today">Today</option>
+             <option value="this_week">This Week</option>
+             <option value="this_month">This Month</option>
+             <option value="this_year">This Year</option>
+        </select>
+
+        <label for="filter_booking_status" class="filter-status">Filter By Status : </label>
+        <select name="filter_booking_status" id="filter_booking_status">
+             <option value="">All</option>
+             <option value="pending">Pending</option>
+             <option value="confirmed">Confirmed</option>
+             <option value="completed">Completed</option>
+             <option value="delayed">Delayed</option>
+             <option value="cancelled">Cancelled</option>
+        </select>
+        
+        <label for="sort_booking_date" class="sort-booking">Sort By : </label>
+        <select name="sort_booking_date" id="sort_booking_date">
              <option value="date_asc">Date (Oldest to Newest)</option>
              <option value="date_desc">Date (Newest to Oldest)</option>
         </select>
@@ -278,46 +303,17 @@
     <div class="booking-list">            
         <div class="booking-list-header">
             <p>BOOKING ID</p>
+            <p>CLIENT NAME</p>
+            <p>SERVICES</p>
             <p>BOOKING DATE</p>
             <p>TIME SLOT</p>
-            <p>CLIENT NAME</p>
-            <p>SERVICE</p>
+            <p>SUBMITED ON</p>
             <p>STATUS</p>
         </div>
-            <div class="booking-list-body">
+            <div class="booking-list-body" id="booking_list_body">
                 
-                <a href="view_booking.php?id=1">
-                    <div class="booking-list-item">
-                        <p>1</p>
-                        <p>6/11/2025</p>
-                        <p>10.00 AM - 10.30 AM</p>
-                        <p>Thamash wijesuriya</p>
-                        <p>Men's Haircut</p>
-                        <p class="booking-pending">Pending</p>
-                    </div>
-                </a> 
-
-                 <a href="view_booking.php?id=2">
-                    <div class="booking-list-item">
-                        <p>2</p>
-                        <p>8/11/2025</p>
-                        <p>12.30 AM - 1.30 PM</p>
-                        <p>Pasindu Jayanath</p>
-                        <p>Medium Tatoo - Chest</p>
-                        <p class="booking-completed">Completed</p>
-                    </div>
-                </a> 
-                   
-                <a href="view_booking.php?id=3">
-                    <div class="booking-list-item">
-                        <p>3</p>
-                        <p>8/11/2025</p>
-                        <p>2.30 AM - 3.30 PM</p>
-                        <p>Janath Madusanka</p>
-                        <p>Large Tatoo - Back</p>
-                        <p class="booking-delayed">Delayed</p>
-                    </div>
-                </a> 
+           
+                 
             </div>
     </div>
 </section>
@@ -526,6 +522,7 @@
  <script src="../resources/js/admin/productsSection.js"></script>
  <script src="../resources/js/admin/servicesSection.js"></script>
  <script src="../resources/js/admin/usersSection.js"></script>
-  <script src="../resources/js/admin/inquirySection.js"></script>
+ <script src="../resources/js/admin/inquirySection.js"></script>
+ <script src="../resources/js/admin/bookingSection.js"></script>
 </body>
 </html>

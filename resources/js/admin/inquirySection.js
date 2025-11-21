@@ -15,7 +15,6 @@ window.addEventListener("DOMContentLoaded", function () {
   fetchInquiryData("", "", "");
 
   searchInquiry.addEventListener("keyup", function () {
-    console.log(this.value);
     const searchInquiryValue = this.value.trim();
     const filterInquiryValue = filterInquiryStatus.value;
     const sortInquiryValue = sortInquirydate.value;
@@ -23,7 +22,6 @@ window.addEventListener("DOMContentLoaded", function () {
   });
 
   filterInquiryStatus.addEventListener("change", function () {
-    console.log(this.value);
     const searchInquiryValue = searchInquiry.value.trim();
     const filterInquiryValue = this.value;
     const sortInquiryValue = sortInquirydate.value;
@@ -31,7 +29,6 @@ window.addEventListener("DOMContentLoaded", function () {
   });
 
   sortInquirydate.addEventListener("change", function () {
-    console.log(this.value);
     const searchInquiryValue = searchInquiry.value.trim();
     const filterInquiryValue = filterInquiryStatus.value;
     const sortInquiryValue = this.value;

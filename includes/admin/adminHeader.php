@@ -23,7 +23,9 @@
                 <h2 class="font-weight-bold"><?php echo isset($pageTitle) ? $pageTitle : "" ?></h2> 
                 </div>
                <div class="header-right">
-                    <i class="fa-regular fa-circle-user"></i>
+                    <a href="./viewAccount.php" class="header-icons">
+                         <i class="fa-regular fa-circle-user"></i>
+                    </a>
                </div>
           </header>
 
