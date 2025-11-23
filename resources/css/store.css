@@ -65,6 +65,7 @@ body{
 }
 
 .product-card{
+    position: relative;
     width: 100%;
     border-radius: 5px;
     padding-bottom: 10px;
@@ -85,6 +86,17 @@ body{
 
 .product-card:hover{
    transform: translateY(-5px);
+}
+
+.stock-badge{
+    position: absolute;
+    font-size: 0.85rem !important;
+    background-color: #d60000;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    right: 8px;
+    top: 8px;
 }
 
 .product-card img{
@@ -110,6 +122,10 @@ body{
 
 .product-card i:hover{
     color: rgb(202, 255, 255);
+}
+
+.product-card a:disabled{
+    cursor: not-allowed;
 }
 
 .product-card h3{

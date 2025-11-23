@@ -5,8 +5,8 @@ window.addEventListener("scroll", () => {
   let viewPortBottom = window.scrollY + window.innerHeight;
   let footerTopY = footer.offsetTop;
 
-  console.log(window.scrollY + window.innerHeight);
-  console.log("footer = " + footerTopY);
+  // console.log(window.scrollY + window.innerHeight);
+  // console.log("footer = " + footerTopY);
 
   if (viewPortBottom > footerTopY) {
     cartIcon.classList.add("stopped");

@@ -27,14 +27,18 @@
       </div>
       <div class="product-info">
         <h1><?php echo htmlspecialchars($product['productName']); ?></h1>
+        <?php if(intval($product['stock']) <= 10){echo '<p class="stock-badge out-of-stock">Availability : Out Of Stock</p>';}else{echo '<p class="stock-badge in-stock">Availability : In Stock</p>';} ?>
         <p class="product-price">LKR <?php echo number_format($product['price'],2); ?></p>
         <p class="product-description"><?php echo htmlspecialchars($product['description']); ?></p>
         <form action="./product.html" method="get">
-         <div class="product-controls">
-           <label for="quantity">Quantity:</label>
-           <input type="number" id="quantity" name="quantity" min="1" value="1">
-         </div>
-           <button type="submit" class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
+           <a class="add-to-cart-btn" href="<?php if(intval($product['stock']) > 10)
+                  {
+                    echo './addToCart.php?productID='.htmlspecialchars($product['productID']);
+                  }
+                  else{
+                    echo './addToCart.php?productID=outOfStock';
+                  } ?>">
+                  <i class="fa-solid fa-cart-shopping"></i>Add to Cart</a>
          </form>
        </div>
        <?php

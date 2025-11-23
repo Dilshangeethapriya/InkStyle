@@ -15,7 +15,7 @@
         <div class="main-cards">
             <div class="card">
                 <div class="card-inner">
-                    <p class="text-primary">Products</p>
+                    <p class="text-primary">Total Products</p>
                     <i class="fa-solid fa-box"></i>
                 </div>
                 <?php
@@ -35,21 +35,34 @@
             </div>
             <div class="card">
                 <div class="card-inner">
-                    <p class="text-primary">Orders</p>
+                    <p class="text-primary">Pending Orders</p>
                     <i class="fa-solid fa-bag-shopping"></i> 
                 </div>
                <span class="text-primary font-weight-bold">40</span> 
             </div>
             <div class="card">
                 <div class="card-inner">
-                    <p class="text-primary">Bookings</p>
+                    <p class="text-primary">Pending Bookings</p>
                     <i class="fa-solid fa-book-bookmark"></i>
                 </div>
-               <span class="text-primary font-weight-bold">35</span> 
+                  <?php
+                  $bookingsCountQuery = "SELECT COUNT(*) AS total FROM bookings where status='pending'";
+                  $bookingsCountResult = mysqli_query($conn, $bookingsCountQuery);
+                   
+                  $bookingCount = 0;
+                  if($bookingsCountResult){
+                     $row = mysqli_fetch_assoc($bookingsCountResult);
+                     $bookingCount = $row['total'];
+                  }
+                  else{
+                    $bookingCount = '0';
+                  }
+                ?>
+               <span class="text-primary font-weight-bold"><?php echo htmlspecialchars($bookingCount); ?></span> 
             </div>
             <div class="card">
                 <div class="card-inner">
-                    <p class="text-primary">Customers</p>
+                    <p class="text-primary">Total Customers</p>
                     <i class="fa-solid fa-users-line"></i>
                 </div>
                 <?php
@@ -118,8 +131,8 @@
                         <img src="<?php echo "." . htmlspecialchars($products['image']); ?>" alt="shampoo">
                     </div>
                     <div class="action-btns">
-                        <a href="./updateProduct.php?productID=<?php echo $products['productID'] ; ?>"><button class="product-update btn-update" id="product-update"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                        <button class="product-delete btn-delete" id="product-delete" onclick="deleteProduct(<?php echo $products['productID'] ; ?>)"><i class="fa-solid fa-trash"></i> Delete</button>
+                        <a href="./updateProduct.php?productID=<?php echo $products['productID'] ; ?>"><button class="product-update btn-update"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
+                        <button class="product-delete btn-delete" onclick="deleteProduct(<?php echo $products['productID'] ; ?>)"><i class="fa-solid fa-trash"></i> Delete</button>
                    </div>
                 </div>
                  <?php
@@ -174,8 +187,8 @@
                     <p>LKR <?php echo number_format($services['estimatedPrice'],2); ?></p>
                     <p><?php echo $services['estimatedServiceTime'] ; ?> minutes</p>
                     <div class="action-btns">
-                        <a href="./updateService.php?serviceID=<?php echo $services['serviceID'] ; ?>"><button class="service-update btn-update" id="service-update"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                        <button class="service-delete btn-delete" id="service-delete" onclick="deleteService(<?php echo $services['serviceID'] ; ?>)" ><i class="fa-solid fa-trash"></i> Delete</button>
+                        <a href="./updateService.php?serviceID=<?php echo $services['serviceID'] ; ?>"><button class="service-update btn-update" ><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
+                        <button class="service-delete btn-delete" onclick="deleteService(<?php echo $services['serviceID'] ; ?>)" ><i class="fa-solid fa-trash"></i> Delete</button>
                     </div>
              </div>
              <?php
@@ -268,7 +281,7 @@
     </div>
 </section>
 
- <section id="admin-bookings">
+<section id="admin-bookings">
     <div class="main-title">
         <h1 class="font-weight-bold">Bookings</h1>
     </div>
@@ -491,8 +504,8 @@
                         <p><?php echo htmlspecialchars($faqItem['question']); ?></p>
                         <p><?php echo htmlspecialchars($faqItem['answer']); ?></p>
                         <div class="action-btns">
-                           <a href="./updateFAQ.php?faqID=<?php echo htmlspecialchars($faqItem['faqID']); ?>"><button class="faq-update btn-update" id="faq-update-1"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                           <button class="faq-delete btn-delete" id="faq-delete" onclick="deleteFAQ(<?php echo htmlspecialchars($faqItem['faqID']); ?>)" ><i class="fa-solid fa-trash"></i> Delete</button>
+                           <a href="./updateFAQ.php?faqID=<?php echo htmlspecialchars($faqItem['faqID']); ?>"><button class="faq-update btn-update" ><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
+                           <button class="faq-delete btn-delete"  onclick="deleteFAQ(<?php echo htmlspecialchars($faqItem['faqID']); ?>)" ><i class="fa-solid fa-trash"></i> Delete</button>
                         </div>
                     </div>
                     <?php

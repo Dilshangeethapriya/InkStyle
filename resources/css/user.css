@@ -183,6 +183,7 @@ body {
   padding: 20px;
   margin-bottom: 20px;
   transition: 0.2s;
+  position: relative;
 }
 
 .order-card:hover,
@@ -199,6 +200,9 @@ body {
   margin-bottom: 15px;
 }
 
+.order-header h3{
+  font-size: 1.5rem;
+}
 
 
 .order-card strong {
@@ -207,11 +211,19 @@ body {
 
 .order-card p {
   margin-bottom: 10px;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.01);
+  border-left: 4px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding-left: 10p;
 }
 
 
 .order-card table {
   text-align: left;
+  margin-top: 30px;
 }
 
 .order-card table th,
@@ -227,10 +239,52 @@ td {
   text-align: right;
 }
 
+.order-card table th.price {
+  text-align: right;
+}
+
+.txtM{
+  font-size: 1.2rem;
+}
+
 .order-card table td.total {
   text-align: right;
   color: rgb(0, 216, 216);
 }
+
+.order-cancel{
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+.order-pending {
+    background-color: #F59E0B;
+ }
+
+ .order-confirmed {
+    background-color: #3B82F6;
+ }
+
+ .order-proccessing {
+    background-color: #8B5CF6;
+ }
+
+ .order-shipped {
+    background-color: #06B6D4;
+ }
+
+ .order-delivered {
+    background-color: #10B981;
+ }
+
+ .order-failedDelivery {
+    background-color: #F97316;
+ }
+
+ .order-cancelled {
+    background-color: #EF4444;
+ }
 
 /* ----- booking  section ----- */
 
@@ -334,6 +388,15 @@ td {
   gap: 30px;
 }
 
+.cart-empty-msg{
+   font-size: 1.3rem;
+   text-align: center;
+   padding: 40px;
+   border: 1px solid rgb(0, 216, 216);
+    border-radius: 8px;
+}
+
+
 .cart-items-heading {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr ; 
@@ -430,18 +493,28 @@ td {
   color: rgb(0, 216, 216);
 }
 
+.grand-total{
+  font-size: 1.3rem;
+}
 
 .action-btns .product-remove {
   padding: 10px;
-  background-color: #ff3c3c;
-  border: none;
+  background-color: #111;
+  color: #d60000;
+  border: 1px solid #d60000;
   border-radius: 8px;
-  color: white;
   cursor: pointer;
 }
 
 .action-btns .product-remove:hover {
-  background-color: #ff5555;
+  background-color: #d60000;
+  color: #111;
+}
+
+.action-btns .product-remove:disabled {
+  border: 2px solid #886868;
+  color: #886868;
+  cursor: not-allowed;
 }
 
 .action-btn {
@@ -611,10 +684,26 @@ ul {
     display: none;
   }
 
+  .quantity-control .btn-qty{
+    width: 30px;
+  }
+
 
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1100px) {
+
+ .quantity-control .quantity-input {
+  width: 30px;
+ 
+}
+
+ .quantity-control .btn-qty{
+    width: 25px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
 
   .quantity-control {
     width: 40px;

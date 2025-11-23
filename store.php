@@ -5,6 +5,12 @@
    
      include "./includes/header.php";
      include "./includes/dbConn.php";
+
+     $toast_data = null;
+     if (isset($_SESSION['toast_message'])) {
+         $toast_data = $_SESSION['toast_message'];
+         unset($_SESSION['toast_message']);
+     }
  ?>
 
    <section class="store-banner">
@@ -27,17 +33,24 @@
             while($product = mysqli_fetch_assoc($fetchProductResult)){
         ?>
             <div class="product-card">
-                <a href="./product.php?productID=<?php echo $product['productID']; ?>">
+                <?php if(intval($product['stock']) <= 10){echo '<p class="stock-badge">Out Of Stock</p>';} ?>
+                <a href="./product.php?productID=<?php echo htmlspecialchars($product['productID']); ?>">
                    <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['productName']); ?>">
                 </a>
                 <div class="product-detail-container">
-                 <a href="./product.php?productID=<?php echo $product['productID']; ?>">
+                 <a href="./product.php?productID=<?php echo htmlspecialchars($product['productID']); ?>">
                   <div class="product-name-container">
                   <h3 class="product-name"><?php echo htmlspecialchars($product['productName']); ?></h3>
                   <p class="product-price"> LKR <?php echo number_format($product['price'],2); ?></p>
                  </div>
                   </a>
-                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a  href="<?php if(intval($product['stock']) > 10)
+                  {
+                    echo './addToCart.php?productID='.htmlspecialchars($product['productID']);
+                  }
+                  else{
+                    echo './addToCart.php?productID=outOfStock';
+                  } ?>"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
             </div>
             <?php
@@ -52,7 +65,7 @@
          </div>
         
    </section>
-       <a href="./user.html#cart">
+       <a href="./user.php#cart">
             <div class="cart-icon" id="cart-icon">
             <i class="fa-solid fa-cart-shopping"></i>
         </div>
@@ -61,6 +74,16 @@
   mysqli_close($conn);
   include "./includes/footer.php";
  ?>
+ <script>
+  document.addEventListener('DOMContentLoaded', () => {
+            const toastMessage = <?php echo json_encode($toast_data); ?>;
+            if (toastMessage) {
+                showToast(toastMessage);
+            }
+        });
+ </script>
+ <div id="toast-container"></div>
+ <script src="./resources/js/toast.js"></script>
  <script src="./resources/js/fab_btn.js"> </script>
  <script src="./resources/js/header.js"></script>
 </body>

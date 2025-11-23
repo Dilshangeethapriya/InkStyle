@@ -8,9 +8,11 @@
  
     $title = "User Account | InkStyle by Dinu";
     $cssFile = "user.css";
+    
   
     include "./includes/header.php";
     include "./includes/dbConn.php";
+    $userID = mysqli_real_escape_string($conn, $_SESSION['userID']);
   ?>
 <section class="user-section">
     <div class="tabs-container">
@@ -49,87 +51,77 @@
  </div>
             <div id="orders" class="content">
                  <h2>Orders</h2>
-                  <div class="order-card">
+                 <?php
+                   $getOrdersListQuery = "SELECT order_id, amount, status, payment_method, created_at FROM orders WHERE user_id = '$userID' ORDER BY created_at DESC";
+                   $getOrdersListResult =  mysqli_query($conn, $getOrdersListQuery);
+
+                   if(mysqli_num_rows($getOrdersListResult) > 0){
+                     while($orders = mysqli_fetch_assoc($getOrdersListResult)){
+                        $orderID = $orders['order_id'];
+                    ?>
+                    <div class="order-card">
                        <div class="order-header">
-                         <h3>Order #1024</h3>
-                         <span class="status delivered">Delivered</span>
+                         <h3>Order ID : <?php echo intVal($orderID) ?></h3>
+                         <span class="status order-<?php echo htmlspecialchars($orders['status']) ?>"><?php echo htmlspecialchars(ucfirst($orders['status'])) ?></span>
                        </div>
-                       <p><strong>Date :</strong> 2025-10-02</p>
+                       <p><strong>Order Date :</strong> <?php echo htmlspecialchars(date("l, jS F Y ",strtotime($orders['created_at']))) ?></p>
+                       <p><strong>Order Time :</strong> <?php echo htmlspecialchars(date("g:i A",strtotime($orders['created_at']))) ?></p>
+                       <p><strong>Payment Method : </strong><?php echo htmlspecialchars($orders['payment_method']) ?></p>
                        <table>
                             <tr>
                                  <th>Item</th> 
                                  <th>Price (LKR)</th>
                                  <th>Quantity</th>
-                                 <th>Total (LKR)</th> 
+                                 <th class="price">Total (LKR)</th> 
                             </tr>
-                            <tr>
-                                 <td>Hair Shampoo</td> 
-                                 <td>800.00</td>
-                                 <td>2</td>
-                                 <td class="price">1,600.00</td> 
+
+                    <?php
+                       
+                        $getOrderDataQuery = "SELECT oi.product_id, oi.quantity, oi.price, oi.subtotal, p.productName 
+                        FROM order_items oi
+                        JOIN orders o ON  o.order_id = oi.order_id
+                        JOIN products p ON  oi.product_id = p.productID
+                        WHERE o.order_id = '$orderID'";
+
+                        $getOrderDataResult = mysqli_query($conn, $getOrderDataQuery);
+                        
+                           if(mysqli_num_rows( $getOrderDataResult) > 0){
+                             while($orderData = mysqli_fetch_assoc( $getOrderDataResult)){
+                         ?>
+                           <tr>
+                                 <td><?php echo htmlspecialchars($orderData['productName']) ?></td> 
+                                 <td><?php echo htmlspecialchars(number_format($orderData['price'],2)) ?></td>
+                                 <td><?php echo intval($orderData['quantity']) ?></td>
+                                 <td class="price"><?php echo htmlspecialchars(number_format($orderData['subtotal'],2)) ?></td> 
                             </tr>
-                            <tr>
-                                 <td>Hair Conditioner </td> 
-                                 <td>1,000.00</td>
-                                 <td>1</td>
-                                 <td class="price">1,000.00</td> 
-                            </tr>
-                            <tr>
-                                 <td>Tattoo Healing Balm</td> 
-                                 <td>600.00</td>
-                                 <td>1</td>
-                                 <td class="price">600.00</td> 
-                            </tr>
+                         
+                            <?php
+
+                              }
+                            }
+                            ?>
+                          
                             <tr>
                                 <td></td>
-                                 <td>Grand total</td>
-                                 <td>=</td>
-                                 <td class="total">3,200.00 LKR</td> 
+                                 <td class="txtM">Grand total</td>
+                                 <td class="txtM">=</td>
+                                 <td class="txtM total"><?php echo htmlspecialchars(number_format($orders['amount'],2)) ?></td> 
                             </tr>
                            </table>
-                       
-                     </div>                         
-                     <div class="order-card">
-                       <div class="order-header">
-                         <h3>Order #1023</h3>
-                         <span class="status pending">Pending</span>
-                       </div>
-                       <p><strong>Date :</strong> 2025-09-26</p>
-                       <table>
-                            <tr>
-                                 <th>Item</th> 
-                                 <th>Price (LKR)</th>
-                                 <th>Quantity</th>
-                                 <th>Total (LKR)</th> 
-                            </tr>
-                            <tr>
-                                 <td>Moisturizing Cream</td> 
-                                 <td>750.00</td>
-                                 <td>1</td>
-                                 <td class="price">750.00</td> 
-                            </tr>
-                            <tr>
-                                 <td>Tattoo Aftercare Bandages</td> 
-                                 <td>350.00</td>
-                                 <td>2</td>
-                                 <td class="price">700.00</td> 
-                            </tr>
-                            <tr>
-                                 <td></td>
-                                 <td>Grand total</td>
-                                 <td>=</td>
-                                 <td class="total">1,450.00 LKR</td> 
-                            </tr>
-                           </table>
-                      
-                     </div>
-    
+                        <button class="btn-cancel order-cancel"  name="order-cancel" onclick="cancelOrder(<?php echo htmlspecialchars($orderID) ; ?>)" <?php if($orders['status'] !== 'pending' && $orders['status'] !== 'failedDelivery' ){echo "disabled";} ?>><i class="fa-solid fa-xmark"></i> Cancel Order</button>
+                     </div>   
+                 <?php
+                     }
+                    
+                   }  
+                 ?>
+                                        
+     
               
             </div>
             <div id="bookings" class="content">
                  <h2>Bookings</h2>
                     <?php
-                        $userID = mysqli_real_escape_string($conn, $_SESSION['userID']);
                         $fetchBookingsQuery = "SELECT * FROM bookings WHERE userID = '$userID' ORDER BY created_at DESC";
                         $fetchBookingsResult = mysqli_query($conn, $fetchBookingsQuery);
 
@@ -176,7 +168,7 @@
                               <p class="services-list-child"> <?php foreach($serviceList as $service){echo '<span> &bull; '.htmlspecialchars($service).'</span><br>' ;}  ?> </p>
                            </div>
                            <p><strong>Notes : </strong> <?php echo htmlspecialchars($bookings['notes']); ?></p>
-                           <button class="btn-cancel" id="booking-cancel" name="booking-cancel" onclick="cancelBooking(<?php echo htmlspecialchars($bookings['bookingID']) ; ?>)" <?php if($bookings['status'] === 'completed' || $bookings['status'] === 'cancelled' || $bookings['status'] === 'confirmed'){echo "disabled";} ?>><i class="fa-solid fa-xmark"></i> Cancel Booking</button>
+                           <button class="btn-cancel"  name="booking-cancel" onclick="cancelBooking(<?php echo htmlspecialchars($bookings['bookingID']) ; ?>)" <?php if($bookings['status'] === 'completed' || $bookings['status'] === 'cancelled' || $bookings['status'] === 'confirmed'){echo "disabled";} ?>><i class="fa-solid fa-xmark"></i> Cancel Booking</button>
                            <span class="created-date">Submited on <?php echo htmlspecialchars(date("l, jS F Y \a\\t g:i A", strtotime($bookings['created_at']))); ?></span>
                       </div>
                      <?php
@@ -194,47 +186,73 @@
                         <p>TOTAL</p>
                         <p>ACTION</p>
                     </div>
-                    <div class="item-card">
+                    <?php
+                       $cartQuery = "SELECT id FROM cart WHERE user_id = '$userID'";
+                       $cartResult = mysqli_query($conn, $cartQuery);
+
+                       $grandTotal = 0;
+
+                       if (mysqli_num_rows($cartResult) === 1) {
+                         $cart = mysqli_fetch_assoc($cartResult);
+                         $cartID = $cart['id'];
+
+                         $itemsQuery = "   SELECT ci.*, p.productName, p.image
+                                           FROM cart_item ci
+                                           JOIN products p ON ci.product_id = p.productID
+                                           WHERE ci.cart_id = '$cartID'
+                                       ";
+
+                         $itemsResult = mysqli_query($conn, $itemsQuery);
+
+
+                         if(mysqli_num_rows($itemsResult) > 0){
+                             while ($item = mysqli_fetch_assoc($itemsResult)){
+                               $itemTotal = floatval($item['price'])*intval($item['quantity']);
+                               $grandTotal += $itemTotal;
+
+
+
+                       
+
+                    ?>
+                    <div class="item-card" data-item-id="<?php echo intval( $item['id']);?>">
                         
-                        <div class="item-header">
-                            <img src="./resources/images/Store/1762509329_shampoo.jpg" alt="item">
-                            <p class="item-name">Hair Shampoo</p>
+                        <div class="item-header" >
+                            <img src="<?php echo htmlspecialchars($item['image']); ?>" alt="<?php echo htmlspecialchars($item['productName']); ?>">
+                            <p class="item-name"><?php echo htmlspecialchars($item['productName']); ?></p>
                         </div>
-                        <p class="price">800.00 LKR</p>
+                        <p class="price" data-price="<?= $item['price'] ?>">LKR <?php echo number_format(floatval($item['price']),2); ?></p>
                         <div class="quantity-control">
                           <button class="btn-qty minus" id="qty-minus">−</button>
-                          <input type="number" class="quantity-input" id="qty-value" value="1" min="1" max="50">
+                          <input type="number" class="quantity-input" id="qty-value" value="<?php echo intval( $item['quantity']);?>" min="1" max="10">
                           <button class="btn-qty plus" id="qty-plus">+</button>
                         </div>
-                        <p class="total">800.00 LKR</p>
+                        <p class="total">LKR <?php echo number_format(floatval($itemTotal),2); ?></p>
                         <div class="action-btns">
-                           <button class="product-remove" id="product_remove"><i class="fa-solid fa-trash"></i> Remove</button>
+                           <button class="product-remove" onclick="removeCartItem(<?php echo intval( $item['id']);?>)"><i class="fa-solid fa-trash"></i> Remove</button>
                        </div> 
                     </div>
-                    <div class="item-card">
-                        <div class="item-header">
-                             <img src="./resources/images/Store/hairOil.jpg" alt="item">
-                            <p class="item-name">Hair Oil</p>
-                        </div>
-                        <p class="price">600.00 LKR</p>
-                        <div class="quantity-control">
-                          <button class="btn-qty minus" id="qty-minus">−</button>
-                          <input type="number" class="quantity-input" id="qty-value" value="1" min="1" max="50">
-                          <button class="btn-qty plus" id="qty-plus">+</button>
-                        </div>
-                        <p class="total">1,200.00 LKR</p>
-                        <div class="action-btns">
-                           <a href="#"><button class="product-remove" id="product_remove"><i class="fa-solid fa-trash"></i> Remove</button></a>
-                       </div> 
-                    </div>
-                      <p><strong>Grand total :</strong> 2,000.00 LKR</p>
-                      <div class="action-btn">
+                     <?php
+                     }
+                         }
+                          else{
+                             echo '<p class="cart-empty-msg"> Your cart is empty!</p>';
+                          }
+               
+
+                       }
+                       else{
+                             echo '<p class="cart-empty-msg"> Your cart is empty!</p>';
+                       }
+             ?>    
+                      <p class="grand-total"><strong>Grand total :</strong> LKR <?php echo number_format(floatval($grandTotal),2); ?></p>
+                       <div class="action-btn">
                        <button onclick="window.location.href='./store.php'" class="btn-add"> <i class="fa-solid fa-cart-plus"></i> Add More Items</button>
                        <button onclick="window.location.href='./checkout.php'" class="btn-checkout"> <i class="fa-solid fa-circle-check"></i> Proceed to Checkout</button>
                       </div>
                       
                  </div>
-                    
+               
             </div>
              <div id="inquiries" class="content">
                  <h2>Inquiries</h2>
@@ -298,7 +316,7 @@
   mysqli_close($conn);
   include "./includes/footer.php";
  ?>
-
+ <script src="./resources/js/cart.js"></script>
  <script src="./resources/js/userPage.js"></script>
  <script src="./resources/js/header.js"></script>
 </body>

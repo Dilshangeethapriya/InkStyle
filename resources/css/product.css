@@ -31,6 +31,26 @@ body{
   gap : 40px
 }
 
+.product-image{
+  position: relative;
+}
+
+.stock-badge {
+    font-size: 1.1rem;
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+.out-of-stock{
+    color: #d60000;
+}
+
+
+.in-stock{
+    color: #10B981;
+}
+
+
 .product-image img {
   width: 600px;
   border-radius: 12px;
@@ -76,6 +96,7 @@ body{
 }
 
 .add-to-cart-btn {
+  text-decoration: none;
   background-color: teal;
   color: white;
   border: none;
@@ -84,6 +105,7 @@ body{
   font-size: 1rem;
   cursor: pointer;
   transition: 0.3s;
+  margin-top: 10px;
 }
 
 .add-to-cart-btn:hover {

@@ -31,3 +31,13 @@ function cancelBooking(bookingID) {
     window.location.href = "./cancelBooking.php?bookingID=" + bookingID;
   }
 }
+
+function cancelOrder(orderID) {
+  if (
+    confirm(
+      "WARNING: This order cancellation is permanent and irreversible. Are you sure you want to cancel this order?"
+    )
+  ) {
+    window.location.href = "./cancelOrder.php?orderID=" + orderID;
+  }
+}

@@ -3,15 +3,17 @@
 
      $title = "Edit Profile | InkStyle by Dinu";
      $cssFile = "editProfile.css";
-   
-     include "./includes/header.php";
-     include "./includes/dbConn.php";
 
-    if (!isset($_SESSION['userID'])) {
+      if (!isset($_SESSION['userID'])) {
       header("Location: login.php");
       exit();
     }
 
+   
+     include "./includes/header.php";
+     include "./includes/dbConn.php";
+
+   
     $userID = $_SESSION['userID'];
 
     $userDataSql = "SELECT * FROM customer WHERE id = '$userID'";
