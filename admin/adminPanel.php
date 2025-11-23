@@ -218,7 +218,18 @@
         <h1 class="font-weight-bold">Orders</h1>
     </div>
      <div class="search-group">
-        <label for="filter_order_status" class="filter-order-status">Filter By Status: </label>
+        <input type="text"  name="search_order_name" id="search_order_name" placeholder="Search Customer's Name">
+
+        <label for="filter_order_date" class="filter-date"> Date : </label>
+        <select name="filter_order_date" id="filter_order_date">
+             <option value="">All</option>
+             <option value="today">Today</option>
+             <option value="this_week">This Week</option>
+             <option value="this_month">This Month</option>
+             <option value="this_year">This Year</option>
+        </select>
+
+        <label for="filter_order_status" class="filter-order-status">Status : </label>
         <select name="filter_order_status" id="filter_order_status">
              <option value="">All</option>
              <option value="pending">Pending</option>
@@ -229,10 +240,10 @@
              <option value="failedDelivery">Delivery Failed</option>
              <option value="cancelled">Cancelled</option>
         </select>
-        <label for="sort_order" class="sort-order">Sort By : </label>
-        <select name="sort_order" id="sort_order">
-             <option value="date_asc">Date (Oldest to Newest)</option>
+        <label for="sort_order_date" class="sort-order">Sort : </label>
+        <select name="sort_order_date" id="sort_order_date">
              <option value="date_desc">Date (Newest to Oldest)</option>
+             <option value="date_asc">Date (Oldest to Newest)</option>
         </select>
     </div>
     <div class="orders-list">            
@@ -243,40 +254,8 @@
             <p>TOTAL AMOUNT</p>
             <p>ORDER STATUS</p>
         </div>
-            <div class="orders-list-body">
-                
-                <a href="view_order.php?id=1">
-                    <div class="orders-list-item">
-                        <p>1</p>
-                        <p>5/11/2025</p>
-                        <p>Dilshan Geethappriya</p>
-                        <p>3000.00 LKR</p>
-                        <p class="order-pending">Pending</p>
-                    </div>
-                </a> 
-                
-                <a href="view_order.php?id=2">
-                    <div class="orders-list-item">
-                        <p>2</p>
-                        <p>1/11/2025</p>
-                        <p>Dinusha Samudri</p>
-                        <p>4500.00 LKR</p>
-                        <p class="order-delivered">Delivered</p>
-                    </div>
-                </a> 
-    
-                <a href="view_order.php?id=3">
-                    <div class="orders-list-item">
-                        <p>3</p>
-                        <p>6/11/2025</p>
-                        <p>Kasun Perera</p>
-                        <p>2200.00 LKR</p>
-                        <p class="order-confirmed">Confirmed</p>
-                    </div>
-                </a> 
-                
-               
-                
+            <div class="orders-list-body" id="orders-list-body">
+                 
             </div>
     </div>
 </section>
@@ -288,7 +267,7 @@
      <div class="search-group">
         <input type="text"  name="search_booking_name" id="search_booking_name" placeholder="Search Customer's Name">
 
-        <label for="filter_booking_date" class="filter-date">Filter By Date : </label>
+        <label for="filter_booking_date" class="filter-date"> Date : </label>
         <select name="filter_booking_date" id="filter_booking_date">
              <option value="">All</option>
              <option value="today">Today</option>
@@ -297,7 +276,7 @@
              <option value="this_year">This Year</option>
         </select>
 
-        <label for="filter_booking_status" class="filter-status">Filter By Status : </label>
+        <label for="filter_booking_status" class="filter-status">Status : </label>
         <select name="filter_booking_status" id="filter_booking_status">
              <option value="">All</option>
              <option value="pending">Pending</option>
@@ -307,10 +286,10 @@
              <option value="cancelled">Cancelled</option>
         </select>
         
-        <label for="sort_booking_date" class="sort-booking">Sort By : </label>
+        <label for="sort_booking_date" class="sort-booking">Sort : </label>
         <select name="sort_booking_date" id="sort_booking_date">
-             <option value="date_asc">Date (Oldest to Newest)</option>
              <option value="date_desc">Date (Newest to Oldest)</option>
+             <option value="date_asc">Date (Oldest to Newest)</option>
         </select>
     </div>
     <div class="booking-list">            
@@ -339,7 +318,7 @@
        <h2 class="font-weight-bold">Staff Management</h2>
      <div class="search-group">
         <input type="text"  name="search_staff" id="search_staff" placeholder="Search Member's Name">
-        <label for="filter_staff" class="filter-staff">Filter By Role: </label>
+        <label for="filter_staff" class="filter-staff">Role: </label>
         <select name="filter_staff" id="filter_staff">
              <option value="">All</option>
              <option value="admin">Admin</option>
@@ -537,5 +516,6 @@
  <script src="../resources/js/admin/usersSection.js"></script>
  <script src="../resources/js/admin/inquirySection.js"></script>
  <script src="../resources/js/admin/bookingSection.js"></script>
+ <script src="../resources/js/admin/orderSection.js"></script>
 </body>
 </html>

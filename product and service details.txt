@@ -10,6 +10,11 @@ TO - DO (optional)
 
 
 
+echo htmlspecialchars(
+    ucfirst(
+        preg_replace('/(?<!^)([A-Z])/', ' $1', $orders['status'])
+    )
+);
 
 
 

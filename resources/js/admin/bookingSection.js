@@ -6,7 +6,12 @@ window.addEventListener("DOMContentLoaded", function () {
   const sortByDate = document.getElementById("sort_booking_date");
   const bookingListBody = document.getElementById("booking_list_body");
 
-  fetchBookingData("", "", "", "");
+  fetchBookingData(
+    searchByName.value.trim(),
+    filterByDate.value,
+    filterByStatus.value,
+    sortByDate.value
+  );
 
   searchByName.addEventListener("keyup", function () {
     console.log(this.value);

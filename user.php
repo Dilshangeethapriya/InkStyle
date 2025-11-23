@@ -105,7 +105,7 @@
                                 <td></td>
                                  <td class="txtM">Grand total</td>
                                  <td class="txtM">=</td>
-                                 <td class="txtM total"><?php echo htmlspecialchars(number_format($orders['amount'],2)) ?></td> 
+                                 <td class="txtM total">LKR <?php echo htmlspecialchars(number_format($orders['amount'],2)) ?></td> 
                             </tr>
                            </table>
                         <button class="btn-cancel order-cancel"  name="order-cancel" onclick="cancelOrder(<?php echo htmlspecialchars($orderID) ; ?>)" <?php if($orders['status'] !== 'pending' && $orders['status'] !== 'failedDelivery' ){echo "disabled";} ?>><i class="fa-solid fa-xmark"></i> Cancel Order</button>
