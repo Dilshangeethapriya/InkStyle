@@ -2,6 +2,12 @@
       session_start();
       include "../includes/dbConn.php";
 
+      if (isset($_SESSION['staffID'])) {
+          header("Location: adminPanel.php");
+          exit();
+      }
+
+
 
       if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['staff_login_btn'])){
         $email = mysqli_real_escape_string($conn, $_POST['email']);

@@ -9,7 +9,7 @@
         $role = mysqli_real_escape_string($conn, $_SESSION['roleOfUser']);
 
         // ---- for admin only pages  ----
-        // if($role === 'Admin'){
+        // if($role !== 'Admin'){
         //     echo '<script>
         //            alert("You dont have access to this page!");
         //            window.location.href = "./adminPanel.php";

@@ -1,10 +1,32 @@
     <?php
       session_start();
+      include "../includes/dbConn.php";
+      $staffID = null;
+      $role = null;
+      if(isset($_SESSION['staffID']) && isset($_SESSION['roleOfUser'])){
+        $staffID = mysqli_real_escape_string($conn, $_SESSION['staffID']);
+        $role = mysqli_real_escape_string($conn, $_SESSION['roleOfUser']);
+
+        // ---- for admin only pages  ----
+        // if($role !== 'Admin'){
+        //     echo '<script>
+        //            alert("You dont have access to this page!");
+        //            window.location.href = "./adminPanel.php";
+        //          </script>';
+        //    exit();
+        // }
+      }
+      else{
+       header("Location: staffLogin.php");
+       exit();
+      }
+
+
+
 
       $title = "Admin Panel | InkStyle by Dinu";
       $pageTitle = "Admin Panel";
       include "../includes/admin/adminHeader.php";
-      include "../includes/dbConn.php";
     ?>
 
 <main class="main-container">
@@ -38,7 +60,19 @@
                     <p class="text-primary">Pending Orders</p>
                     <i class="fa-solid fa-bag-shopping"></i> 
                 </div>
-               <span class="text-primary font-weight-bold">40</span> 
+                <?php 
+                   $ordersCountQuery = "SELECT COUNT(*) AS total FROM orders  WHERE status='pending'";
+                   $ordersCountResult = mysqli_query($conn,$ordersCountQuery);
+                   $ordersCount = 0;
+                   if($ordersCountResult){
+                      $row = mysqli_fetch_assoc($ordersCountResult);
+                      $ordersCount = $row['total'];
+                   }
+                   else{
+                    $ordersCount = 0;
+                   }
+                ?>
+               <span class="text-primary font-weight-bold"><?php echo htmlspecialchars($ordersCount); ?></span> 
             </div>
             <div class="card">
                 <div class="card-inner">
@@ -46,7 +80,7 @@
                     <i class="fa-solid fa-book-bookmark"></i>
                 </div>
                   <?php
-                  $bookingsCountQuery = "SELECT COUNT(*) AS total FROM bookings where status='pending'";
+                  $bookingsCountQuery = "SELECT COUNT(*) AS total FROM bookings WHERE status='pending'";
                   $bookingsCountResult = mysqli_query($conn, $bookingsCountQuery);
                    
                   $bookingCount = 0;
@@ -82,6 +116,7 @@
             </div>
         </div>
         <div class="charts">
+           
             <div class="charts-card">
                 <h2 class="chart-title">Top Selling Products (Monthly Sales)</h2>
                 <div class="bar-chart" id="bar-chart">
@@ -132,7 +167,7 @@
                     </div>
                     <div class="action-btns">
                         <a href="./updateProduct.php?productID=<?php echo $products['productID'] ; ?>"><button class="product-update btn-update"><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                        <button class="product-delete btn-delete" onclick="deleteProduct(<?php echo $products['productID'] ; ?>)"><i class="fa-solid fa-trash"></i> Delete</button>
+                        <button class="product-delete btn-delete" onclick="deleteProduct(<?php echo $products['productID'] ; ?>)" <?php if($role !== 'Admin'){echo "disabled";} ?>><i class="fa-solid fa-trash"></i> Delete</button>
                    </div>
                 </div>
                  <?php
@@ -188,7 +223,7 @@
                     <p><?php echo $services['estimatedServiceTime'] ; ?> minutes</p>
                     <div class="action-btns">
                         <a href="./updateService.php?serviceID=<?php echo $services['serviceID'] ; ?>"><button class="service-update btn-update" ><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                        <button class="service-delete btn-delete" onclick="deleteService(<?php echo $services['serviceID'] ; ?>)" ><i class="fa-solid fa-trash"></i> Delete</button>
+                        <button class="service-delete btn-delete" onclick="deleteService(<?php echo $services['serviceID'] ; ?>)"  <?php if($role !== 'Admin'){echo "disabled";} ?>><i class="fa-solid fa-trash"></i> Delete</button>
                     </div>
              </div>
              <?php
@@ -365,63 +400,6 @@
 </section>
 
 
-<section id="admin-reviews">
-    <div class="main-title">
-        <h1 class="font-weight-bold">Reviews</h1>
-    </div>
-     <div class="search-group">
-        <label for="filter_review_rating" class="filter-review-rating">Filter By Status: </label>
-        <select name="filter_review_rating" id="filter_review_rating">
-                <option value="">All</option>
-                <option value="5">5 Stars</option>
-                <option value="4">4 Stars</option>
-                <option value="3">3 Stars</option>
-                <option value="2">2 Stars</option>
-                <option value="1">1 Star</option>
-        </select>
-        <label for="sort_review" class="sort-review">Sort By : </label>
-        <select name="sort_review" id="sort_review">
-             <option value="date_asc">Date (Oldest to Newest)</option>
-             <option value="date_desc">Date (Newest to Oldest)</option>
-        </select>
-    </div>
-    <div class="review-list">            
-        <div class="review-list-header">
-            <p>REVIEW ID</p>
-            <p>PRODUCT/SERVICE NAME</p>
-            <p>REVIEW DESCRIPTION</p>
-            <p>RATING</p>
-            <p>DATE</p>
-        </div>
-        <div class="review-list-body">     
-                <div class="review-list-item">
-                    <p>1</p>
-                    <p>Hair Shampoo</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, minima!</p>
-                    <p>5 &#9733;</p>
-                    <p>7/11/2025</p>
-                </div>  
-        </div>
-        <div class="review-list-body">     
-                <div class="review-list-item">
-                    <p>2</p>
-                    <p>Hair Conditioner</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, minima!</p>
-                    <p>4 &#9733;</p>
-                    <p>7/11/2025</p>
-                </div>  
-        </div>
-        <div class="review-list-body">     
-                <div class="review-list-item">
-                    <p>3</p>
-                    <p>Tatoo Balm</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, minima!</p>
-                    <p>3 &#9733;</p>
-                    <p>8/11/2025</p>
-                </div>  
-        </div>
-    </div>
-</section>
 
 <section id="admin-inquiries">
     <div class="main-title">
@@ -484,7 +462,7 @@
                         <p><?php echo htmlspecialchars($faqItem['answer']); ?></p>
                         <div class="action-btns">
                            <a href="./updateFAQ.php?faqID=<?php echo htmlspecialchars($faqItem['faqID']); ?>"><button class="faq-update btn-update" ><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                           <button class="faq-delete btn-delete"  onclick="deleteFAQ(<?php echo htmlspecialchars($faqItem['faqID']); ?>)" ><i class="fa-solid fa-trash"></i> Delete</button>
+                           <button class="faq-delete btn-delete"  onclick="deleteFAQ(<?php echo htmlspecialchars($faqItem['faqID']); ?>)" <?php if($role !== 'Admin'){echo "disabled";} ?>><i class="fa-solid fa-trash"></i> Delete</button>
                         </div>
                     </div>
                     <?php

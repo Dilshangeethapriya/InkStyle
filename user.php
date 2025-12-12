@@ -81,7 +81,7 @@
                         FROM order_items oi
                         JOIN orders o ON  o.order_id = oi.order_id
                         JOIN products p ON  oi.product_id = p.productID
-                        WHERE o.order_id = '$orderID'";
+                        WHERE o.order_id = '$orderID' ";
 
                         $getOrderDataResult = mysqli_query($conn, $getOrderDataQuery);
                         
@@ -113,7 +113,10 @@
                  <?php
                      }
                     
-                   }  
+                   } 
+                   else{
+                          echo' <h3 style="text-align:center">No Orders Found</h3>';
+                        } 
                  ?>
                                         
      
@@ -173,6 +176,8 @@
                       </div>
                      <?php
                          }
+                        }else{
+                          echo' <h3 style="text-align:center">No Bookings Found</h3>';
                         }
                      ?>          
             </div>
@@ -303,6 +308,9 @@
                    <?php
                            }
                       }
+                      else{
+                          echo' <h3 style="text-align:center">No Inquiries Found</h3>';
+                        }
                    ?>
             </div>
          </div>

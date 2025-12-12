@@ -38,11 +38,33 @@ if(isset($_POST['register_btn'])){
 
   $sql = "INSERT INTO customer(fullName,phone,email,address,password) VALUES ('$name','$phone','$email','$address','$password')";
 
-  if(mysqli_query($conn,$sql)){
-     echo '<script>
-            alert("Registration Successfull!");
-            window.location.href = "./login.php";
-            </script>';
+  if(mysqli_query($conn,$sql)){     
+  $url = "http://localhost/inkstyle/services/emailService.php";
+
+  $postData = [
+    "subject" => "Welcome to InkStyle By Dinu!",
+    "body" => " <h2>Hello, $name!</h2>
+                <p>Thank you for registering at <b>InkStyle By Dinu</b>.</p>
+                <p>We are excited to have you on board.</p>
+                <br>
+                <p>Regards,<br>InkStyle By Dinu Team</p>",
+    "recipientEmail" => $email,
+    "recipientName" => $name,
+    "redirectUrl" => "./login.php?register=success"
+
+  ];
+
+  $ch = curl_init($url);
+  curl_setopt($ch, CURLOPT_POST, true);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1);
+  curl_exec($ch);
+  curl_close($ch);
+
+  header("Location: login.php?register=success");
+  exit();
+    
   }else{
     echo "Error: ". mysqli_error($conn);
   }
@@ -72,7 +94,7 @@ mysqli_close($conn);
       <h1>Create Account</h1>
       <p>Join InkStyle by Dinu and experience where ink meets style.</p>
 
-      <form class="register-form" action="register.php" method="POST">
+      <form class="register-form" id="register-form" action="register.php" method="POST">
         <div class="form-group">
           <label for="name"><i class="fa-solid fa-user"></i> Full Name</label>
           <input type="text" id="name" name="name" placeholder="Enter your full name" required>
@@ -110,6 +132,21 @@ mysqli_close($conn);
       
     </div>
   </section>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("register-form");
+    const submitBtn = document.getElementById("register_btn");
+
+     form.addEventListener("submit", function () {
+            submitBtn.innerText = "Processing...";
+    
+    });
+       
+   
+
+   
+});
+</script>
 
 </body>
 </html>

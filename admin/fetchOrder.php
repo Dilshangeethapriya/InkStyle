@@ -1,5 +1,25 @@
 <?php
-include "../includes/dbConn.php";
+  session_start();
+  include "../includes/dbConn.php";
+  $staffID = null;
+  $role = null;
+  if(isset($_SESSION['staffID']) && isset($_SESSION['roleOfUser'])){
+    $staffID = mysqli_real_escape_string($conn, $_SESSION['staffID']);
+    $role = mysqli_real_escape_string($conn, $_SESSION['roleOfUser']);
+
+    // ---- for admin only pages  ----
+    // if($role !== 'Admin'){
+    //     echo '<script>
+    //            alert("You dont have access to this page!");
+    //            window.location.href = "./adminPanel.php";
+    //          </script>';
+    //    exit();
+    // }
+  }
+  else{
+   header("Location: staffLogin.php");
+   exit();
+  }
 
 
 $searchByName = isset($_POST['searchNameValue']) ? mysqli_real_escape_string($conn, trim($_POST['searchNameValue'])) : '';
@@ -69,7 +89,7 @@ $fetchOrderDataResult = mysqli_query($conn, $finalFetchOrderDataQuery);
 if(mysqli_num_rows($fetchOrderDataResult) > 0){
     while($orderData = mysqli_fetch_assoc($fetchOrderDataResult)){
          echo '
-              <a href="viewOrder.php?OrderID='.intval($orderData['order_id']).'">
+              <a href="viewOrder.php?orderID='.intval($orderData['order_id']).'">
                     <div class="orders-list-item">
                         <p>'.intval($orderData['order_id']).'</p>
                         <p>'.htmlspecialchars(date("Y/m/d",strtotime($orderData['created_at']))).'</p>

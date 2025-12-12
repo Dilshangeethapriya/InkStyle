@@ -1,5 +1,25 @@
 <?php
-include "../includes/dbConn.php";
+  session_start();
+  include "../includes/dbConn.php";  
+  $staffID = null;
+  $role = null;
+  if(isset($_SESSION['staffID']) && isset($_SESSION['roleOfUser'])){
+    $staffID = mysqli_real_escape_string($conn, $_SESSION['staffID']);
+    $role = mysqli_real_escape_string($conn, $_SESSION['roleOfUser']);
+     //
+    // ---- for admin only pages  ----
+    // if($role !== 'Admin'){
+    //     echo '<script>
+    //            alert("You dont have access to this page!");
+    //            window.location.href = "./adminPanel.php";
+    //          </script>';
+    //    exit();
+    // }
+  }
+  else{
+   header("Location: staffLogin.php");
+   exit();
+  }
 
 $searchStaffValue = isset($_POST['searchStaffValue'])? trim($_POST['searchStaffValue']) : '';
 $filterStaffValue = isset($_POST['filterStaffValue'])? trim($_POST['filterStaffValue']) : '';
@@ -36,7 +56,7 @@ if(mysqli_num_rows($fetchStaffDataResult) > 0){
           <p>'.htmlspecialchars($staffData['role']).'</p>
           <div class="action-btns">
                            <a href="updateStaff.php?staffID='.base64_encode($staffData['staffID']).'"><button class="staff-update btn-update" ><i class="fa-solid fa-pen-to-square"></i> Update</button></a>
-                           <button class="staff-delete btn-delete"  onclick="deleteStaff(\''.base64_encode($staffData['staffID']).'\')"><i class="fa-solid fa-trash" ></i> Delete</button>
+                           <button class="staff-delete btn-delete"  onclick="deleteStaff(\''.base64_encode($staffData['staffID']).'\')" '.(($role !== 'Admin')? "disabled": "").'><i class="fa-solid fa-trash" ></i> Delete</button>
          </div>  
         </div>
          ';

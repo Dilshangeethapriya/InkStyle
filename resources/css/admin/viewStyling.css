@@ -70,6 +70,34 @@
     color: #303030;
 }
 
+.view-group table{
+   width: 100%;
+   text-align: left;
+}
+
+.view-group table th{
+   padding: 5px;
+   border-bottom: 1px solid #dddddd;
+   font-size: 1.3rem;
+}
+
+.view-group table td{
+   padding: 5px;
+   border-bottom: 1px solid #dddddd;
+   font-size: 1.1rem;
+}
+
+
+.view-group table tfoot td{
+   font-size: 1.3rem;
+}
+
+.view-group table .tbl-total{
+   text-align: right;
+   font-weight: 600;
+}
+
+
 .view-bold-text{
     font-weight: 700;
     color: black;
@@ -117,7 +145,7 @@
     color: #3B82F6 !important;
  }
 
- .order-proccessing {
+ .order-processing {
     color: #8B5CF6 !important;
  }
 

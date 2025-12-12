@@ -1,15 +1,14 @@
     <?php
       session_start();
       include "../includes/dbConn.php";
-     
       $staffID = null;
       $role = null;
       if(isset($_SESSION['staffID']) && isset($_SESSION['roleOfUser'])){
         $staffID = mysqli_real_escape_string($conn, $_SESSION['staffID']);
         $role = mysqli_real_escape_string($conn, $_SESSION['roleOfUser']);
-
+         //
         // ---- for admin only pages  ----
-        // if($role === 'Admin'){
+        // if($role !== 'Admin'){
         //     echo '<script>
         //            alert("You dont have access to this page!");
         //            window.location.href = "./adminPanel.php";
@@ -17,55 +16,32 @@
         //    exit();
         // }
       }
-    //   else{
-    //    header("Location: staffLogin.php");
-    //    exit();
-    //   }
+      else{
+       header("Location: staffLogin.php");
+       exit();
+      }
+
+    
 
 
       
       $title = "Order Details | InkStyle by Dinu";
       $pageTitle = "Order Details";
       include "../includes/admin/adminHeader.php";
-      $bookingData = null;
-      $bookingID = null;
+      $orderData = null;
+      $orderID = null;
 
-      if(isset($_GET['bookingID'])){
-          $bookingID = mysqli_real_escape_string($conn, $_GET['bookingID']);
-          $bookedServices = [];
-          $fetchBookingDataQuery = "SELECT 
-          c.fullName,c.phone,c.email,c.address, b.*, s.serviceName, bs.bookingServiceID 
+      if(isset($_GET['orderID'])){
+          $orderID = mysqli_real_escape_string($conn, $_GET['orderID']);
+          $fetchOrderDataQuery = "SELECT c.fullName,c.phone,c.email,c.address, o.*
           FROM customer c 
-          INNER JOIN bookings b ON c.id = b.userID 
-          INNER JOIN booking_services bs ON bs.bookingID = b.bookingID 
-          INNER JOIN services s ON s.serviceID = bs.serviceID 
-          WHERE b.bookingID = '$bookingID'";
+          JOIN orders o ON c.id = o.user_id 
+          WHERE o.order_id = '$orderID'";
 
-          $fetchBookingDataResult = mysqli_query($conn, $fetchBookingDataQuery);
-          if(mysqli_num_rows($fetchBookingDataResult) > 0){
-          $bookingData = mysqli_fetch_assoc($fetchBookingDataResult);
+          $fetchOrderDataResult = mysqli_query($conn, $fetchOrderDataQuery);
+          if(mysqli_num_rows($fetchOrderDataResult) > 0){
+          $orderData = mysqli_fetch_assoc($fetchOrderDataResult);
 
-          // minute to hour/minutes
-          $totalMinutes = intval($bookingData['totalDuration']);
-          $hours = intdiv($totalMinutes, 60);
-          $minuts = $totalMinutes%60;
-          $totalDuration = 0;
-          if($hours !== 0 &&  $minuts !== 0){
-             $totalDuration =  "{$hours}h {$minuts}m";
-          }
-          elseif($hours === 0 &&  $minuts !== 0){
-            $totalDuration =  "{$minuts}m";
-          }
-          elseif($hours !== 0 &&  $minuts === 0){
-            $totalDuration =  "{$hours}h";
-          }
-         
-       
-
-          $fetchBookedServicesResult = mysqli_query($conn, $fetchBookingDataQuery);
-          while($fetchServiceData = mysqli_fetch_assoc($fetchBookedServicesResult)){
-               $bookedServices[] = $fetchServiceData['serviceName'];
-          }
           
          }
         else{
@@ -82,30 +58,57 @@
       
 
         if(isset($_POST['update_details_btn'])){
-            $bookingDate = mysqli_real_escape_string($conn, $_POST['book_date']);
-            $bookingStartTime = mysqli_real_escape_string($conn, $_POST['book_time']);
-            $bookingDuration = mysqli_real_escape_string($conn, $_POST['book_duration']);
-            $bookingNotes = isset($_POST['book_notes'])? mysqli_real_escape_string($conn, $_POST['book_notes']) : $bookingData['notes'];
-            $bookingStatus = mysqli_real_escape_string($conn, $_POST['book_status']);
+            $changeAddress = mysqli_real_escape_string($conn, $_POST['change_address']);
+            $orderStatus = mysqli_real_escape_string($conn, $_POST['order_status']);
+            $userID = mysqli_real_escape_string($conn, $_POST['user_id']);
 
-            $startDateTime = new DateTime("$bookingDate $bookingStartTime");
-            $endDateTime = clone $startDateTime;
-            date_modify($endDateTime, '+' . $bookingDuration . ' minutes');
-            $bookingEndTime = date_format($endDateTime, 'H:i:s');
+    
+            $statusUpdateQuery = "UPDATE orders SET status = '$orderStatus' WHERE order_id ='$orderID'";
+            $addressUpdateQuery = "UPDATE customer SET address = '$changeAddress' WHERE id ='$userID'";
+            
 
-            $bookingUpdateQuery = "UPDATE bookings SET booking_date = '$bookingDate', booking_start_time = '$bookingStartTime', booking_end_time = '$bookingEndTime', totalDuration = '$bookingDuration', notes = '$bookingNotes', status = '$bookingStatus' WHERE bookingID ='$bookingID'";
+            if(mysqli_query($conn, $statusUpdateQuery) && mysqli_query($conn, $addressUpdateQuery)){
 
-            if(mysqli_query($conn, $bookingUpdateQuery)){
+            $url = "http://localhost/inkstyle/services/emailService.php";
+            $customerName = $orderData['fullName'];
+            $customerEmail = $orderData['email'];
+            $OstatusCap = ucfirst($orderStatus);
+            $orderDate = date("l, jS F Y",strtotime($orderData['created_at']));
+
+
+            $postData = [
+              "subject" => "Update on Your InkStyle By Dinu Order $orderID",
+              "body" => " <h2>Hello, $customerName!</h2>
+                          <p>Your order (ID:$orderID) has been updated.</p>
+                          <p><b>Status:</b> $OstatusCap</p>
+                          <p><b>Order Date:</b> $orderDate</p>
+                          <p><b>Delivery Address:</b> $changeAddress</p>
+                          <br>
+                          <p>Regards,<br>InkStyle By Dinu Team</p>",
+                          "recipientEmail" => $customerEmail,
+                          "recipientName" => $customerName,
+                          "redirectUrl" => "./viewOrder.php?orderID=$orderID"
+          
+            ];
+          
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1);
+            curl_exec($ch);
+            curl_close($ch);
+  
 
             echo '<script>
-                   alert("Booking details updated successfully!");
-                   window.location.href = "./viewBooking.php?bookingID='.$bookingID.'";
+                   alert("Order details updated successfully!");
+                   window.location.href = "./viewOrder.php?orderID='.$orderID.'";
                  </script>';
             }
             else{
                  echo '<script>
-                       alert("Could not update the booking details!");
-                       window.location.href = "./viewBooking.php?bookingID='.$bookingID.'";
+                       alert("Could not update order details!");
+                       window.location.href = "./viewOrder.php?orderID='.$orderID.'";
                       </script>';
             }
 
@@ -125,92 +128,98 @@
         <main class="main-container">
             <div class="view-card">
                 <a href="./adminPanel.php#admin-bookings" class="close-btn"><i class="fa-solid fa-xmark-circle"></i></a>
-                <h2>Booking Details - ID : <?php echo htmlspecialchars($bookingData['bookingID']); ?></h2>
+                <h2>Order ID : <?php echo htmlspecialchars($orderData['order_id']); ?></h2>
+
+                 <div class="view-group">
+                    <table>
+                        <thead>
+                          <tr>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th class="tbl-total">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                           
+                    <?php
+                     $fetchOrderItemsQuery = "SELECT oi.*, p.productName FROM order_items oi JOIN products p ON oi.product_id = p.productID WHERE oi.order_id = '$orderID'";
+                     $fetchorderItemsResult = mysqli_query($conn, $fetchOrderItemsQuery);
+                       while($row = mysqli_fetch_assoc($fetchorderItemsResult)){
+                                echo '<tr>
+                                         <td>'.$row['productName'].'</td>
+                                         <td>'.$row['price'].'</td>
+                                         <td>'.$row['quantity'].'</td>
+                                         <td  class="tbl-total" >'.$row['subtotal'].'</td>
+                                      </tr>';
+                       }
+                  
+                     ?>
+                    </tbody>
+                    <tfoot>
+                          <tr>
+                            <td></td>
+                            <td>Grand Total</td>
+                             <td>=</td>
+                            <td class="tbl-total"><?php echo htmlspecialchars($orderData['amount']); ?></td>
+                          </tr>
+                        </tfoot>
+                   </table>
+                </div>
                 <div class="view-group">
-                    <p class="view-bold-text">Client Name : </p>
-                    <p><?php echo htmlspecialchars($bookingData['fullName']); ?></p>
+                    <p class="view-bold-text">Customer Name : </p>
+                    <p><?php echo htmlspecialchars($orderData['fullName']); ?></p>
                 </div>
                 <div class="view-group">
                     <p class="view-bold-text">Phone Number : </p>
-                    <p><?php echo htmlspecialchars($bookingData['phone']); ?></p>
+                    <p><?php echo htmlspecialchars($orderData['phone']); ?></p>
                 </div>
                 <div class="view-group">
                     <p class="view-bold-text">Email : </p>
-                    <p><?php echo htmlspecialchars($bookingData['email']); ?></p>
+                    <p><?php echo htmlspecialchars($orderData['email']); ?></p>
                 </div>
                 <div class="view-group">
                     <p class="view-bold-text">Address : </p>
-                    <p><?php echo htmlspecialchars($bookingData['address']); ?></p>
+                    <p><?php echo htmlspecialchars($orderData['address']); ?></p>
                 </div>
                 <div class="view-group">
-                    <p class="view-bold-text">Booking ID : </p>
-                    <p><?php echo htmlspecialchars($bookingData['bookingID']); ?></p>
+                    <p class="view-bold-text">Order Date: </p>
+                    <p><?php echo htmlspecialchars(date("l, jS F Y",strtotime($orderData['created_at']))); ?></p>
                 </div>
                 <div class="view-group">
-                    <p class="view-bold-text">Booking Date : </p>
-                    <p><?php echo htmlspecialchars(date("l, jS F Y",strtotime($bookingData['booking_date']))); ?></p>
-                </div>
-                <div class="view-group">
-                    <p class="view-bold-text">Time Slot : </p>
-                    <p><?php echo htmlspecialchars(date("g:i A",strtotime($bookingData['booking_start_time']))); ?> - <?php echo htmlspecialchars(date("g:i A",strtotime($bookingData['booking_end_time']))); ?></p>
-                </div>
-                <div class="view-group">
-                    <p class="view-bold-text">Total Duration : </p>
-                    <p><?php echo htmlspecialchars($totalDuration); ?></p>
+                    <p class="view-bold-text">Order Time: </p>
+                    <p><?php echo htmlspecialchars(date("g:i A",strtotime($orderData['created_at']))); ?></p>
                 </div>
                  <div class="view-group">
-                    <p class="view-bold-text">Notes: </p>
-                    <p><?php echo $bookingData['notes'] ? htmlspecialchars($bookingData['notes']) : "No notes added"; ?></p>
+                    <p class="view-bold-text">Payment Method: </p>
+                    <p><?php echo htmlspecialchars($orderData['payment_method']); ?></p>
                 </div>
-                <div class="view-group">
-                    <p class="view-bold-text">Booked services : </p>
-                    <ul><?php
-                    foreach($bookedServices as $service){
-                           echo '<li>'.htmlspecialchars($service).'</li>';
-                    }
-                     
-                     ?>
-                    </ul>
-                </div>
-                <div class="view-group">
-                    <p class="view-bold-text">Submited On : </p>
-                    <p><?php echo htmlspecialchars(date("l, jS F Y",strtotime($bookingData['created_at']))); ?></p>
-                </div>
+              
                 <div class="view-group">
                     <p class="view-bold-text">Status : </p>
-                    <p class="booking-<?php echo htmlspecialchars($bookingData['status']); ?>"><?php echo htmlspecialchars(ucfirst($bookingData['status'])); ?></p>
+                    <p class="order-<?php echo htmlspecialchars($orderData['status']); ?>"><?php echo htmlspecialchars(ucfirst($orderData['status'])); ?></p>
                 </div>
-
-                <h3>Change Booking Details</h3>
-                <form action="viewBooking.php?bookingID=<?php echo htmlspecialchars($bookingData['bookingID']); ?>" method="POST" class="form" >
+                
+                <h3>Update Order Details</h3>
+                <form action="viewOrder.php?orderID=<?php echo htmlspecialchars($orderData['order_id']); ?>" method="POST" class="form" >
+                    <input type="hidden" id="user_id" name="user_id" class="order-details-input" value="<?php echo htmlspecialchars($orderData['user_id']); ?>">
                     <div class="form-group">
-                        <label for="book_date">Booking Date</label>
-                        <input type="date" id="book_date" name="book_date" class="booking-details-input" value="<?php echo htmlspecialchars($bookingData['booking_date']); ?>" required>
+                        <label for="change_address">Change Delivery Address</label>
+                        <input type="text" id="change_address" name="change_address" class="order-details-input" value="<?php echo htmlspecialchars($orderData['address']); ?>">
                     </div>
-                    <div class="form-group">
-                        <label for="book_time">Starting Time</label>
-                        <input type="time" id="book_time" name="book_time" class="booking-details-input" value="<?php echo htmlspecialchars($bookingData['booking_start_time']); ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="book_duration">Total Duration(Minutes)</label>
-                        <input type="number" id="book_duration" name="book_duration" class="booking-details-input" value="<?php echo htmlspecialchars($bookingData['totalDuration']); ?>" required>
-                    </div>
-                    <div class="form-group textarea-group">
-                        <label for="book_notes">notes</label>
-                        <textarea id="book_notes" name="book_notes" class="booking-details-input" rows="5" placeholder="Do you have anything extra?"><?php echo htmlspecialchars($bookingData['notes']); ?></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="book_status">Status</label>
-                        <select name="book_status" id="book_status" class="booking-details-input">
-                            <option value="pending" <?php if($bookingData['status'] == 'pending') echo 'selected'; ?>>pending</option>
-                            <option value="confirmed" <?php if($bookingData['status'] == 'confirmed') echo 'selected'; ?>>confirmed</option>
-                            <option value="completed" <?php if($bookingData['status'] == 'completed') echo 'selected'; ?>>completed</option>
-                            <option value="delayed" <?php if($bookingData['status'] == 'delayed') echo 'selected'; ?>>delayed</option>
-                            <option value="cancelled" <?php if($bookingData['status'] == 'cancelled') echo 'selected'; ?>>cancelled</option>
+                    <div class="form-group" >
+                        <label for="order_status">Udate Status</label>
+                        <select name="order_status" id="order_status" class="order-details-input">
+                            <option value="pending" <?php if($orderData['status'] == 'pending') echo 'selected'; ?>>pending</option>
+                            <option value="confirmed" <?php if($orderData['status'] == 'confirmed') echo 'selected'; ?>>confirmed</option>
+                            <option value="processing" <?php if($orderData['status'] == 'processing') echo 'selected'; ?>>processing</option>
+                            <option value="shipped" <?php if($orderData['status'] == 'shipped') echo 'selected'; ?>>shipped</option>
+                            <option value="delivered" <?php if($orderData['status'] == 'delivered') echo 'selected'; ?>>delivered</option>
+                            <option value="failedDelivery" <?php if($orderData['status'] == 'failedDelivery') echo 'selected'; ?>>failedDelivery</option>
+                            <option value="cancelled" <?php if($orderData['status'] == 'cancelled') echo 'selected'; ?>>cancelled</option>
                         </select>
                         <div class="form-actions">
-                        <button type="submit" class="submit-btn" id="update_details_btn" name="update_details_btn" disabled><i class="fa-solid fa-pen-to-square"></i>Update</button>
+                        <button type="submit" class="submit-btn" id="update_details_btn" name="update_details_btn" disabled><i class="fa-solid fa-pen-to-square"></i>Update Status</button>
                       </div>
                     </div>
 
@@ -223,7 +232,7 @@
         mysqli_close($conn); 
     ?>
     <script>
-        const inputs = document.querySelectorAll('.booking-details-input');
+        const inputs = document.querySelectorAll('.order-details-input');
         const submitBtn = document.getElementById('update_details_btn');
         
         inputs.forEach(input => {

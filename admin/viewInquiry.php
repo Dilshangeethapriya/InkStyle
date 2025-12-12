@@ -1,10 +1,34 @@
     <?php
       session_start();
+      include "../includes/dbConn.php";
+      date_default_timezone_set('Asia/Colombo');
+      $staffID = null;
+      $role = null;
+      if(isset($_SESSION['staffID']) && isset($_SESSION['roleOfUser'])){
+        $staffID = mysqli_real_escape_string($conn, $_SESSION['staffID']);
+        $role = mysqli_real_escape_string($conn, $_SESSION['roleOfUser']);
+         //
+        // ---- for admin only pages  ----
+        // if($role !== 'Admin'){
+        //     echo '<script>
+        //            alert("You dont have access to this page!");
+        //            window.location.href = "./adminPanel.php";
+        //          </script>';
+        //    exit();
+        // }
+      }
+      else{
+       header("Location: staffLogin.php");
+       exit();
+      }
+
+    
+
       $title = "Inquiry Details | InkStyle by Dinu";
       $pageTitle = "Inquiry Details";
 
       include "../includes/admin/adminHeader.php";
-      include "../includes/dbConn.php";
+
 
       $inquiryID = "";
       $inquiryData = "";
@@ -54,11 +78,62 @@
         if(isset($_POST['send_reply_btn'])){
         $inquiryID = mysqli_real_escape_string($conn, $_GET['inquiryID']);
         $reply = mysqli_real_escape_string($conn, $_POST['reply']);
+        $currentDateTime = date("l, jS F Y \a\\t g:i A");
 
 
         $sendReplyQuery = "INSERT INTO inquiry_replies(inquiryID, reply) VALUES('$inquiryID', '$reply')";
 
         if(mysqli_query($conn, $sendReplyQuery)){
+
+            $url = "http://localhost/inkstyle/services/emailService.php";
+
+            $customerName = $inquiryData['name'];
+            $customerEmail = $inquiryData['email'];
+            $InqStatusCap = ucfirst($inquiryData['status']);
+            $inquiryDate = date("l, jS F Y \a\\t g:i A",strtotime($inquiryData['created_at']));
+            $inquiryMessage = $inquiryData['message'];
+
+            $postData = [
+              "subject" => "Response to Your Inquiry (ID:$inquiryID) | InkStyle By Dinu",
+              "body" => " <h2>Hello, $customerName!</h2>
+    
+                          <p>We have reviewed your inquiry and our team has provided a response.</p>
+
+                              
+                          <p><b>Your Inquiry:</b></p>
+                          <div style='background:#f5f5f5; padding:10px; border-radius:8px;'>$inquiryMessage</div>
+                          <br>
+               
+                          <p><b>Inquiry Details:</b></p>
+                          <ul>
+                              <li><b>Inquiry ID:</b> $inquiryID</li>
+                              <li><b>Submitted On:</b> $inquiryDate</li>
+                              <li><b>Status:</b> $InqStatusCap</li>
+                              <li><b>Replied On:</b> $currentDateTime</li>
+                          </ul>
+               
+                          <p><b>Our Response:</b></p>
+                          <p>$reply</p>
+               
+                          <br>
+                          <p>If you have more questions, feel free to reply to this email.</p>
+               
+                          <p>Best regards,<br>
+                          <b>InkStyle By Dinu</b> Team</p>",
+                          "recipientEmail" => $customerEmail,
+                          "recipientName" => $customerName,
+                          "redirectUrl" => "./viewInquiry.php?inquiryID=$inquiryID"
+            ];
+          
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1);
+            curl_exec($ch);
+            curl_close($ch);   
+
+
             echo '<script>
                    alert("Reply sent successfully!");
                    window.location.href = "./viewInquiry.php?inquiryID='.$inquiryID.'";

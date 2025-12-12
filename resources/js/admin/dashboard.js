@@ -4,6 +4,7 @@ var productsChartOptions = {
   chart: {
     type: "bar",
     height: 400,
+    offsetX: 10,
     toolbar: {
       show: false,
     },
@@ -28,6 +29,12 @@ var productsChartOptions = {
       "Hair Conditioner",
       "Tatoo Healing Balm",
     ],
+    labels: {
+      show: true,
+      trim: false,
+      rotate: -45,
+      hideOverlappingLabels: false,
+    },
   },
 
   colors: ["#00aedaff", "#d60000ff", "#19d600ff", "#dda900ff", "#7700e6ff"],
@@ -37,7 +44,7 @@ var productsChartOptions = {
       distributed: true,
       borderRadius: 3,
       borderRadiusApplication: "end",
-      columnWidth: "40%",
+      columnWidth: "30%",
     },
   },
 
@@ -59,7 +66,7 @@ var areaChartOptions = {
     height: 400,
     type: "area",
     toolbar: {
-      show: false,
+      show: true,
     },
   },
 
@@ -98,3 +105,35 @@ var areaChart = new ApexCharts(
   areaChartOptions
 );
 areaChart.render();
+
+fetch("getTopProducts.php")
+  .then((response) => response.json())
+  .then((data) => {
+    const names = data.map((item) => item.productName || "Unknown");
+    const quantities = data.map((item) => Number(item.total_qty));
+
+    productsChart.updateOptions({
+      xaxis: { categories: names },
+      series: [{ data: quantities }],
+    });
+  })
+  .catch((error) => {
+    console.error("Error loading product data:", error);
+  });
+
+fetch("getMonthlyData.php")
+  .then((response) => response.json())
+  .then((data) => {
+    let orderMonths = data.orders.map((x) => x.month);
+    let orderTotals = data.orders.map((x) => x.total);
+
+    let bookingTotals = data.bookings.map((x) => x.total);
+
+    areaChart.updateOptions({
+      labels: orderMonths,
+      series: [
+        { name: "Orders", data: orderTotals },
+        { name: "Bookings", data: bookingTotals },
+      ],
+    });
+  });

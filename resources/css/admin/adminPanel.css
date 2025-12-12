@@ -194,6 +194,11 @@ body{
     background-color: #eb0000;
 }
  
+.btn-delete:disabled {
+    background-color: #ff9f9f;
+    cursor: not-allowed;
+}
+ 
 
   /* ----- main section ----- */
 

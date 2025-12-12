@@ -1,3 +1,9 @@
+<?php
+   if (!isset($_SESSION['userID'])) {
+       header("Location: login.php");
+       exit("Unauthorized");
+   }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,10 +12,7 @@
     <link rel="icon" type="image/x-icon" href="./resources/images/inkstyle_favicon.ico">
     <title>Order Successful</title>
     <style>
-        /* Base Colors */
-        :root {
-          
-        }
+        
 
         body {
             margin: 0;

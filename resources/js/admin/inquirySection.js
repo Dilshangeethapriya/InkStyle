@@ -1,11 +1,11 @@
-window.addEventListener("DOMContentLoaded", function () {
-  // FAQ delete button action
-  function deleteFAQ(faqID) {
-    if (confirm("Are you sure, you want to delete this FAQ?")) {
-      window.location.href = "./deleteFAQ.php?faqID=" + faqID;
-    }
+// FAQ delete button action
+function deleteFAQ(faqID) {
+  if (confirm("Are you sure, you want to delete this FAQ?")) {
+    window.location.href = "./deleteFAQ.php?faqID=" + faqID;
   }
+}
 
+window.addEventListener("DOMContentLoaded", function () {
   // customer inquiry list
   const searchInquiry = document.getElementById("search_inquiry");
   const filterInquiryStatus = document.getElementById("filter_inquiry_status");

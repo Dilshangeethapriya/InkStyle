@@ -3,6 +3,7 @@ session_start();
 include "./includes/dbConn.php";
 
 if (!isset($_SESSION['userID'])) {
+    header("Location: login.php");
     exit("Unauthorized");
 }
 

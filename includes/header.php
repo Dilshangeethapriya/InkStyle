@@ -34,7 +34,12 @@
                 <li><a class="nav-link" href="./contact.php">Contact</a></li>
                 <li><a class="nav-link" href="./store.php">Store</a></li>
                 <li><a class="nav-link" href="./booking.php">Book Now</a></li>
-                <li><a class="nav-link" href="./login.php">Login</a></li>
+                <?php
+                 if(!isset($_SESSION['userID'])){
+                      echo'<li><a class="nav-link" href="./login.php">Login</a></li>';
+                   }
+                ?>
+                
                 <li><a class="nav-link" href="./user.php">Account</a></li>
                </ul>
             <ul class="nav-list">
@@ -42,7 +47,11 @@
                 <li class="hideOnMobile"><a class="nav-link" href="./index.php#about-us">About Us</a></li>
                 <li class="hideOnMobile"><a class="nav-link" href="./index.php#services-and-prices">Services</a></li>
                 <li class="hideOnMobile"><a class="nav-link" href="./contact.php">Contact</a></li>
-                <li class="hideOnMobile"><a class="nav-link" href="./login.php">Login</a></li>
+                <?php
+                 if(!isset($_SESSION['userID'])){
+                      echo'<li><a class="nav-link" href="./login.php">Login</a></li>';
+                   }
+                ?>
                 <li class="hideOnMobile"><a class="nav-link  shop-btn" href="./store.php">Store</a></li>
                 <li class="hideOnMobile"><a class="nav-link booking-btn" href="./booking.php">Book Now</a></li>
                 <li class="hideOnMobile"><a class="nav-link  user-btn" href="./user.php"><i class="fa-solid fa-user"></i></a></li>

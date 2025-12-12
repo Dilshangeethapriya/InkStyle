@@ -9,7 +9,7 @@
         $role = mysqli_real_escape_string($conn, $_SESSION['roleOfUser']);
 
         // ---- for admin only pages  ----
-        // if($role === 'Admin'){
+        // if($role !== 'Admin'){
         //     echo '<script>
         //            alert("You dont have access to this page!");
         //            window.location.href = "./adminPanel.php";
@@ -17,10 +17,10 @@
         //    exit();
         // }
       }
-    //   else{
-    //    header("Location: staffLogin.php");
-    //    exit();
-    //   }
+      else{
+       header("Location: staffLogin.php");
+       exit();
+      }
 
 
       
@@ -97,6 +97,37 @@
 
             if(mysqli_query($conn, $bookingUpdateQuery)){
 
+            $url = "http://localhost/inkstyle/services/emailService.php";
+            $customerName = $bookingData['fullName'];
+            $customerEmail = $bookingData['email'];
+            $BkStatusCap = ucfirst($bookingStatus);
+            $bookingDate = date("l, jS F Y",strtotime($bookingData['booking_date']));
+            $bookingSlot = date("g:i A",strtotime($bookingData['booking_start_time']))."-".date("g:i A",strtotime($bookingData['booking_end_time']));
+            $bookingDuration = $bookingData['totalDuration'];
+
+            $postData = [
+              "subject" => "Update on Your Appointment ID:$bookingID at InkStyle By Dinu",
+              "body" => " <h2>Hello, $customerName!</h2>
+                          <p>Your appointment (ID:$bookingID) has been updated.</p>
+                          <p><b>Status:</b> $BkStatusCap</p>
+                          <p><b>Booking Date:</b>  $bookingDate</p>
+                          <p><b>Time Slot:</b>  $bookingSlot</p>
+                          <p><b>Expected Total Duration:</b> $bookingDuration Minutes</p>
+                          <br>
+                          <p>Regards,<br>InkStyle By Dinu Team</p>",
+                          "recipientEmail" => $customerEmail,
+                          "recipientName" => $customerName,
+                          "redirectUrl" => "./viewBooking.php?bookingID=$bookingID"
+            ];
+          
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1);
+            curl_exec($ch);
+            curl_close($ch);
+
             echo '<script>
                    alert("Booking details updated successfully!");
                    window.location.href = "./viewBooking.php?bookingID='.$bookingID.'";
@@ -141,10 +172,6 @@
                 <div class="view-group">
                     <p class="view-bold-text">Address : </p>
                     <p><?php echo htmlspecialchars($bookingData['address']); ?></p>
-                </div>
-                <div class="view-group">
-                    <p class="view-bold-text">Booking ID : </p>
-                    <p><?php echo htmlspecialchars($bookingData['bookingID']); ?></p>
                 </div>
                 <div class="view-group">
                     <p class="view-bold-text">Booking Date : </p>

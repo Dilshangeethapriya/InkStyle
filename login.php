@@ -50,7 +50,13 @@ mysqli_close($conn);
        <section class="login-section">
          <div class="login-card">
             <h1>Welcome Back</h1>
-            <p>Login to manage your bookings, orders, and account details.</p>  
+            <p>Login to manage your bookings, orders, and account details.</p> 
+            <?php
+                if(isset($_GET['register']) && $_GET['register'] == 'success'){
+                    echo '<p style="color:#2CFF05; font-size:1.2rem">Registration successful! Please log in.</p>';
+                }
+             ?>
+ 
             <form class="login-form" action="#" method="post" >
              <div class="form-group">
                <label for="email"><i class="fa-solid fa-envelope"></i> Email</label>

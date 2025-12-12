@@ -45,7 +45,6 @@
                  <a href="./adminPanel.php#admin-orders"><li class="sidebar-list-item"><i class="fa-solid fa-bag-shopping"></i> Orders</li></a>
                  <a href="./adminPanel.php#admin-bookings"><li class="sidebar-list-item"><i class="fa-solid fa-book-bookmark"></i> Bookings</li></a>
                  <a href="./adminPanel.php#admin-users"><li class="sidebar-list-item"><i class="fa-solid fa-users"></i> Users</li></a>
-                 <a href="./adminPanel.php#admin-reviews"><li class="sidebar-list-item"><i class="fa-solid fa-star-half-stroke"></i> Reviews</li></a>
                  <a href="./adminPanel.php#admin-inquiries"><li class="sidebar-list-item"><i class="fa-solid fa-clipboard-question"></i> Inquiries</li></a>
             </ul>
            </aside>
